@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>50 Студий детейлинга Тулы — База персонализации & Готовые сайты для отправки</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B0C0E'/%3E%3Cpath d='M6 22l10-14 10 14H6z' fill='none' stroke='%23DF4E16' stroke-width='2.6' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='18' r='3' fill='%23FF6B35'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap">
+<style>
+@font-face{font-family:"Oswald";src:url("/fonts/oswald.woff2") format("woff2");font-weight:600 700;font-display:swap}
+@font-face{font-family:"Onest";src:url("/fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
+:root{
+  --night:#0B0C0E;
+  --night-2:#13151A;
+  --night-3:#1A1D24;
+  --night-line:rgba(255,255,255,0.09);
+  --night-muted:#8E94A3;
+
+  --accent:#DF4E16;
+  --accent-hover:#C4410F;
+  --accent-on-dark:#FF6B35;
+  --accent-glow:rgba(223,78,22,0.28);
+
+  --champagne:#C8A464;
+  --champagne-soft:rgba(200,164,100,0.14);
+
+  --green:#10b981;
+  --tg:#229ed9;
+  --wa:#25d366;
+
+  --display:"Oswald","Arial Narrow","Roboto Condensed",sans-serif;
+  --sans:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --r:20px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:#fff;font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased;padding:32px 16px 80px}
+.wrap{max-width:1240px;margin:0 auto}
+a{color:inherit;text-decoration:none}
+
+.hero-box{background:linear-gradient(135deg,rgba(223,78,22,.14) 0%,rgba(200,164,100,.05) 100%),var(--night-2);border:1px solid var(--night-line);border-radius:var(--r);padding:32px;margin-bottom:32px}
+h1{font:700 clamp(28px,3.8vw,44px)/1.1 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:0 0 12px;color:#fff}
+.lead{font-size:16px;color:var(--night-muted);max-width:68ch;line-height:1.5;margin-bottom:24px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.stat{background:rgba(255,255,255,.03);border:1px solid var(--night-line);border-radius:14px;padding:16px}
+.stat-val{font:700 28px/1 var(--display);color:var(--accent-on-dark)}
+.stat-lbl{font-size:13px;color:var(--night-muted);margin-top:4px}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;align-items:center;justify-content:space-between}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--night-line);background:var(--night-2);color:var(--night-muted);font:600 13px/1 var(--sans);cursor:pointer;transition:all .15s}
+.tab:hover{color:#fff;border-color:var(--accent)}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.search-wrap{position:relative;flex:1;max-width:380px;min-width:260px}
+.search-input{width:100%;height:44px;border-radius:999px;border:1px solid var(--night-line);background:var(--night-2);color:#fff;padding:0 18px 0 42px;font:500 14px var(--sans);outline:0}
+.search-input:focus{border-color:var(--accent)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#6b7280}
+
+.grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1140px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+.card{background:var(--night-2);border:1px solid var(--night-line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;transition:all .2s;position:relative}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 14px 36px rgba(223,78,22,.15)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.rank{font:700 15px/1 var(--display);color:var(--night-muted)}
+.badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+.badge-ans{background:rgba(223,78,22,.15);color:var(--accent-on-dark);border:1px solid rgba(223,78,22,.35)}
+.badge-top{background:var(--champagne-soft);color:var(--champagne);border:1px solid rgba(200,164,100,.35)}
+
+.name{font:700 20px/1.2 var(--display);text-transform:uppercase;color:#fff;margin-bottom:4px}
+.addr{font-size:13px;color:var(--night-muted);margin-bottom:6px}
+.phone{font-size:13px;font-weight:600;color:#e5e7eb;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+
+.quote{background:rgba(255,255,255,.03);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 8px 8px 0;font-size:12px;color:#d1d5db;line-height:1.45;margin-bottom:14px;flex:1}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--night-line);border-bottom:1px solid var(--night-line);margin-bottom:14px;font-size:13px}
+.rating{color:var(--champagne);font-weight:600}
+.price{color:#fff;font-weight:700}
+
+/* Action buttons */
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 12px;border-radius:10px;font:600 13px/1 var(--sans);cursor:pointer;transition:all .15s;border:0;text-align:center}
+.btn-open{background:var(--accent);color:#fff}
+.btn-open:hover{background:var(--accent-hover)}
+.btn-copy{background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--night-line)}
+.btn-copy:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+
+/* Outreach copy buttons */
+.outreach-box{background:rgba(0,0,0,.35);border:1px solid var(--night-line);border-radius:12px;padding:12px;margin-top:auto}
+.outreach-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--night-muted);margin-bottom:8px}
+.outreach-btns{display:flex;flex-direction:column;gap:6px}
+.btn-msg{background:rgba(255,255,255,.04);color:#d1d5db;border:1px solid var(--night-line);min-height:36px;font-size:12px;justify-content:flex-start;padding:0 10px;border-radius:8px;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn-msg:hover{background:rgba(223,78,22,.15);border-color:var(--accent);color:#fff}
+
+.messengers{display:flex;gap:6px;margin-top:8px}
+.btn-wa{background:rgba(37,211,102,.12);color:#25d366;border:1px solid rgba(37,211,102,.3);flex:1;min-height:36px;font-size:12px}
+.btn-wa:hover{background:#25d366;color:#000}
+.btn-tg{background:rgba(34,158,217,.12);color:#229ed9;border:1px solid rgba(34,158,217,.3);flex:1;min-height:36px;font-size:12px}
+.btn-tg:hover{background:#229ed9;color:#fff}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#fff;color:var(--night);padding:14px 22px;border-radius:999px;font:700 14px/1 var(--sans);z-index:99;box-shadow:0 12px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(20px);pointer-events:none;transition:all .25s}
+.toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  
+  <div class="hero-box">
+    <h1>50 Студий детейлинга Тулы — База персонализации</h1>
+    <p class="lead">
+      Для каждой студии сгенерирован индивидуальный сайт на чистом статическом роуте <code>/s/&lt;slug&gt;/</code>.
+      Никаких ссылок на конкурентов, реальные цены и цитаты аудита. В 1 клик копируйте персональное сообщение и отправляйте владельцу в WhatsApp или Telegram.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val" id="statTotal">50</div>
+        <div class="stat-lbl">Студий в базе Тулы</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:var(--accent-on-dark)" id="statAnswered">13</div>
+        <div class="stat-lbl">Ответили на аудит (цитаты)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:var(--champagne)">★ 5.0</div>
+        <div class="stat-lbl">Рейтинг Яндекса (28 студий)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:#10b981">100%</div>
+        <div class="stat-lbl">Готовы к рассылке во вторник</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="tabs" id="filterTabs">
+        <button class="tab on" type="button" data-filter="all">Все 50 студий</button>
+        <button class="tab" type="button" data-filter="answered">⚡️ Ответили на аудит (13)</button>
+        <button class="tab" type="button" data-filter="top5">★ Рейтинг 5.0 (28)</button>
+        <button class="tab" type="button" data-filter="under35">До 35 000 ₽</button>
+      </div>
+
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="search-input" id="searchInput" type="search" placeholder="Поиск по названию или улице...">
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" id="studiosGrid">
+    <!-- Loaded dynamically from studios-tula.json -->
+  </div>
+</div>
+
+<div class="toast" id="toast">📋 Скопировано в буфер обмена!</div>
+
+<script>
+(function(){
+  var grid = document.getElementById("studiosGrid");
+  var toast = document.getElementById("toast");
+  var allData = [];
+  var activeFilter = "all";
+
+  function showToast(text){
+    if(text) toast.textContent = text;
+    toast.classList.add("show");
+    setTimeout(function(){ toast.classList.remove("show"); }, 2400);
+  }
+
+  function copyText(val, msg){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(val).then(function(){ showToast(msg || "📋 Скопировано в буфер обмена!"); });
+    } else {
+      var t = document.createElement("textarea"); t.value = val; document.body.appendChild(t); t.select();
+      try{ document.execCommand("copy"); showToast(msg || "📋 Скопировано в буфер обмена!"); }catch(e){}
+      document.body.removeChild(t);
+    }
+  }
+
+  function render(list){
+    var host = window.location.origin || "";
+    grid.innerHTML = list.map(function(s){
+      var staticUrl = host + "/s/" + s.slug + "/";
+      var badgeClass = s.audit_answered ? "badge-ans" : "badge-top";
+      var badgeLabel = s.audit_answered ? ("⚡️ " + s.audit_response_time) : ("★ " + s.rating_ya.toFixed(1));
+
+      // Psychological outreach messages
+      var msgDirect = "Здравствуйте, " + s.name + "! Мы подготовили для вашей студии на " + s.address + " конверсионный сайт премиум-уровня по защите кузова и полировке: " + staticUrl + " . Все ваши цены (зоны риска от " + s.price_zones.toLocaleString('ru-RU') + " ₽), гарантия " + s.warranty_years + " и лекала уже прописаны. Посмотрите с телефона — готовы передать его вашей студии на тест.";
+      var msgStep1 = "Здравствуйте! Проводили тайный аудит студий оклейки и детейлинга в Туле — вы среди лидеров по качеству ответа. Для вас уже собран персональный сайт: " + staticUrl + " . Можем прислать короткое 2-минутное видео с разбором конверсии?";
+      var msgStep2 = "Записали 2-минутный разбор: почему большинство сайтов детейлинга в Туле теряют клиентов с рекламы, и как интерактивный калькулятор зон риска и бронь свободных окон на вашем готовом сайте " + staticUrl + " дают на 40% больше заявок без скидок.";
+
+      var waLink = "https://wa.me/" + s.phone_digits + "?text=" + encodeURIComponent(msgDirect);
+      var tgLink = "https://t.me/+" + s.phone_digits + "?text=" + encodeURIComponent(msgDirect);
+
+      return '<div class="card">' +
+        '<div class="card-top">' +
+          '<span class="rank">#' + (s.id) + ' · ' + s.slug + '</span>' +
+          '<span class="badge ' + badgeClass + '">' + badgeLabel + '</span>' +
+        '</div>' +
+        '<div class="name">' + s.name + '</div>' +
+        '<div class="addr">📍 ' + s.address + '</div>' +
+        '<div class="phone">📞 ' + s.phone + '</div>' +
+        '<div class="quote">' + s.audit_quote + '</div>' +
+        '<div class="meta-row">' +
+          '<span class="rating">★ ' + s.rating_ya.toFixed(1) + ' (' + s.reviews_ya + ' отз.)</span>' +
+          '<span class="price">Зоны: от ' + s.price_zones.toLocaleString('ru-RU') + ' ₽</span>' +
+        '</div>' +
+        '<div class="acts">' +
+          '<a class="btn btn-open" href="' + staticUrl + '" target="_blank">Открыть сайт ↗</a>' +
+          '<button class="btn btn-copy" type="button" data-copy-url="' + staticUrl + '">Копировать URL</button>' +
+        '</div>' +
+        '<div class="outreach-box">' +
+          '<div class="outreach-title">Психологические сообщения (в 1 клик):</div>' +
+          '<div class="outreach-btns">' +
+            '<button class="btn btn-msg" type="button" data-copy-msg="' + encodeURIComponent(msgDirect) + '" title="' + msgDirect + '">1. Прямой оффер: «Подготовили сайт...»</button>' +
+            '<button class="btn btn-msg" type="button" data-copy-msg="' + encodeURIComponent(msgStep1) + '" title="' + msgStep1 + '">2. Интрига: «Тайный аудит студий...»</button>' +
+            '<button class="btn btn-msg" type="button" data-copy-msg="' + encodeURIComponent(msgStep2) + '" title="' + msgStep2 + '">3. Разбор: «2-минутный разбор конверсии...»</button>' +
+          '</div>' +
+          '<div class="messengers">' +
+            '<a class="btn btn-wa" href="' + waLink + '" target="_blank" rel="noopener">WhatsApp</a>' +
+            '<a class="btn btn-tg" href="' + tgLink + '" target="_blank" rel="noopener">Telegram</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    grid.querySelectorAll("[data-copy-url]").forEach(function(b){
+      b.addEventListener("click", function(){
+        copyText(b.getAttribute("data-copy-url"), "🔗 Ссылка на сайт студии скопирована!");
+      });
+    });
+
+    grid.querySelectorAll("[data-copy-msg]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var text = decodeURIComponent(b.getAttribute("data-copy-msg"));
+        copyText(text, "💬 Текст сообщения скопирован! Готов к отправке");
+      });
+    });
+  }
+
+  function filterAndSearch(){
+    var q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+    var filtered = allData.filter(function(s){
+      if(activeFilter === "answered" && !s.audit_answered) return false;
+      if(activeFilter === "top5" && s.rating_ya < 5.0) return false;
+      if(activeFilter === "under35" && s.price_zones > 35000) return false;
+
+      if(q){
+        var match = s.name.toLowerCase().includes(q) ||
+                    s.address.toLowerCase().includes(q) ||
+                    s.slug.toLowerCase().includes(q) ||
+                    s.audit_quote.toLowerCase().includes(q);
+        if(!match) return false;
+      }
+      return true;
+    });
+    render(filtered);
+  }
+
+  fetch("/studios-tula.json")
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      allData = d;
+      render(allData);
+    })
+    .catch(function(e){ console.error(e); });
+
+  document.querySelectorAll("#filterTabs .tab").forEach(function(t){
+    t.addEventListener("click", function(){
+      document.querySelectorAll("#filterTabs .tab").forEach(function(x){ x.classList.remove("on"); });
+      t.classList.add("on");
+      activeFilter = t.getAttribute("data-filter");
+      filterAndSearch();
+    });
+  });
+
+  var sInput = document.getElementById("searchInput");
+  if(sInput) sInput.addEventListener("input", filterAndSearch);
+})();
+</script>
+</body>
+</html>
