@@ -2,6 +2,7 @@ import sys, json, urllib.parse, os
 from playwright.sync_api import sync_playwright
 
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3010/"
+if not URL.endswith("/"): URL += "/"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "/tmp/shots"
 os.makedirs(OUT, exist_ok=True)
 
