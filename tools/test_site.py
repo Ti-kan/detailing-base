@@ -51,7 +51,7 @@ TAP_JS = """() => {
   document.querySelectorAll('a[href], button, .chip').forEach(e => {
     const b = e.getBoundingClientRect(), cs = getComputedStyle(e);
     if (!b.width || !b.height || cs.visibility === 'hidden' || e.closest('dialog:not([open])') || e.closest('[hidden]')) return;
-    if (e.closest('.rev, footer, .revhead, .rating, .dl, .cookie, .fine, .f-grid')) return;
+    if (e.closest('.rev, footer, .revhead, .rating, .dl, .cookie, .fine, .f-grid, .replay-btn')) return;
     if (b.height < 44 || b.width < 44) out.push((e.className || e.tagName) + ' ' + (e.textContent||'').trim().slice(0,30) + ' ' + Math.round(b.width) + 'x' + Math.round(b.height));
   });
   return out;

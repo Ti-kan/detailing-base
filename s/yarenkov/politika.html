@@ -7,8 +7,8 @@
 <meta name="robots" content="noindex, follow">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap">
 <style>
-@font-face{font-family:"Oswald";src:url("/fonts/oswald.woff2") format("woff2");font-weight:600 700;font-display:swap}
-@font-face{font-family:"Onest";src:url("/fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Oswald";src:url("../../fonts/oswald.woff2") format("woff2");font-weight:600 700;font-display:swap}
+@font-face{font-family:"Onest";src:url("../../fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
 :root{
   --ink:#090a0d; --ink-2:#1b1e24; --muted:#646977; --line:#e2e5eb; --paper:#f4f6f9; --white:#fff;
   --accent:#DF4E16;
@@ -76,7 +76,7 @@ footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-si
   var params = new URLSearchParams(window.location.search);
   var qStudio = params.get("studio");
   if (qStudio) {
-    fetch("/studios-tula.json").then(function(r){ return r.json(); }).then(function(studios){
+    fetch("../../studios-tula.json").then(function(r){ return r.json(); }).then(function(studios){
       var found = studios.find(function(st){ return st.slug.toLowerCase() === qStudio.toLowerCase(); });
       if (found) {
         document.title = "Политика конфиденциальности — " + found.name + " (" + (found.city || "Тула") + ")";

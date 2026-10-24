@@ -7,15 +7,17 @@
 <meta name="description" id="pageDesc" content="Black Shine Detailing в Туле: оклейка зон риска полиуретаном Llumar / SunTek Ultra (200 мкм), полировка и керамика. ★ 5.0 ТОП Тулы · 277 отзывов">
 <meta name="theme-color" content="#0B0C0E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B0C0E'/%3E%3Cpath d='M6 22l10-14 10 14H6z' fill='none' stroke='%23DF4E16' stroke-width='2.6' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='18' r='3' fill='%23FF6B35'/%3E%3C/svg%3E">
-<link rel="preload" href="/fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
-<link rel="preload" as="image" href="/img/hero-entry-final.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="../../img/hero-entry-final.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="../../img/car-dusty.jpg">
+<link rel="preload" as="image" href="../../img/car-clean.jpg">
 <style>
-@font-face{font-family:"Oswald";src:url("/fonts/oswald.woff2") format("woff2");font-weight:500 700;font-display:swap}
-@font-face{font-family:"Onest";src:url("/fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Oswald";src:url("../../fonts/oswald.woff2") format("woff2");font-weight:500 700;font-display:swap}
+@font-face{font-family:"Onest";src:url("../../fonts/onest.woff2") format("woff2");font-weight:400 700;font-display:swap}
 
 :root{
   --night:#0B0C0E;
@@ -129,45 +131,52 @@ body:not(.hero-entered) .hero .frame-slot{position:relative;z-index:99999}
 .hero-word span{display:inline-block;opacity:0;transform:translateY(36%);transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .6s ease;will-change:transform,opacity}
 .hero.revealed .hero-word span, .hero.on .hero-word span, .hero-entered .hero-word span{opacity:1;transform:translateY(0);transition-delay:calc(var(--i) * 45ms + 40ms)}
 
-/* SINGLE-VIDEO ZERO-DISTORTION HERO ENGINE (16:9 NATIVE MATCH) */
-.frame-slot{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r);margin-top:8px !important}
-.frame{position:relative;z-index:2;width:100%;height:100%;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;background:#000;box-shadow:0 24px 60px -20px rgba(0,0,0,.65);border:1px solid var(--night-line);transform-origin:center center}
-.frame video{width:100%;height:100%;object-fit:cover;display:block}
+/* SINGLE-VIDEO ZERO-DISTORTION HERO ENGINE (2.35:1 CINEMASCOPE NATIVE MATCH) */
+.frame-slot{position:relative;width:100%;aspect-ratio:2.35 / 1 !important;border-radius:var(--r);margin-top:8px !important;touch-action:pan-y}
+.frame{position:relative;z-index:2;width:100%;height:100%;aspect-ratio:2.35 / 1 !important;border-radius:var(--r);overflow:hidden;background:#000;box-shadow:0 24px 60px -20px rgba(0,0,0,.65);border:1px solid var(--night-line);transform-origin:center center;touch-action:pan-y}
+.frame video{width:100%;height:100%;display:block}
 
-#heroVideoStage:not(.is-docked){position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;background:#000;border-radius:0px;box-shadow:none;border:none;margin-top:0 !important;aspect-ratio:auto;will-change:top,left,width,height,border-radius,box-shadow;transition:top 0.95s cubic-bezier(0.16,1,0.3,1),left 0.95s cubic-bezier(0.16,1,0.3,1),width 0.95s cubic-bezier(0.16,1,0.3,1),height 0.95s cubic-bezier(0.16,1,0.3,1),border-radius 0.95s cubic-bezier(0.16,1,0.3,1),box-shadow 0.95s cubic-bezier(0.16,1,0.3,1)}
-#heroVideoStage.is-docked{position:relative;top:auto !important;left:auto !important;width:100% !important;height:100% !important;aspect-ratio:16/9;border-radius:var(--r);z-index:2;margin-top:0 !important;transition:none !important;box-shadow:0 24px 60px -20px rgba(0,0,0,.65);border:1px solid var(--night-line)}
+#heroVideoStage:not(.is-docked){position:fixed;top:0;left:0;width:100vw;height:100svh;z-index:99999;background:#0B0C0E;border-radius:0px;box-shadow:none;border:none;margin-top:0 !important;aspect-ratio:auto !important;will-change:top,left,width,height,border-radius,box-shadow;transition:top 0.95s cubic-bezier(0.16,1,0.3,1),left 0.95s cubic-bezier(0.16,1,0.3,1),width 0.95s cubic-bezier(0.16,1,0.3,1),height 0.95s cubic-bezier(0.16,1,0.3,1),border-radius 0.95s cubic-bezier(0.16,1,0.3,1),box-shadow 0.95s cubic-bezier(0.16,1,0.3,1)}
+#heroVideoStage:not(.is-docked) video{width:100%;height:100%;object-fit:contain}
+#heroVideoStage.is-docked{position:relative;top:auto !important;left:auto !important;width:100% !important;height:100% !important;aspect-ratio:2.35 / 1 !important;border-radius:var(--r);z-index:2;margin-top:0 !important;transition:none !important;box-shadow:0 24px 60px -20px rgba(0,0,0,.65);border:1px solid var(--night-line)}
+#heroVideoStage.is-docked video{width:100%;height:100%;object-fit:cover}
+
+/* TRUE DUSTY-TO-CLEAN 2-LAYER REVEAL ENGINE */
+.car-wipe-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;opacity:0;pointer-events:none;transition:opacity .4s ease}
+#heroVideoStage.is-docked .car-wipe-canvas{opacity:1;pointer-events:auto}
+.car-wipe-canvas img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none;pointer-events:none}
+.car-layer-clean{position:absolute;inset:0;width:100%;height:100%;-webkit-mask-image:radial-gradient(circle 135px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 75%, rgba(0,0,0,0) 100%);mask-image:radial-gradient(circle 135px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 75%, rgba(0,0,0,0) 100%)}
+
+/* OPTICAL DETAILING LOUPE (270PX DIAMETER HUD) */
+.car-loupe{position:absolute;top:var(--ly, -999px);left:var(--lx, -999px);width:270px;height:270px;transform:translate3d(-50%,-50%,0);pointer-events:none;z-index:6;opacity:0;transition:opacity .25s ease}
+.frame.is-inspecting .car-loupe{opacity:1}
+.loupe-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(223,78,22,0.85);box-shadow:0 0 24px rgba(223,78,22,0.45),inset 0 0 20px rgba(200,164,100,0.2);overflow:hidden;-webkit-backdrop-filter:brightness(1.18) contrast(1.12);backdrop-filter:brightness(1.18) contrast(1.12)}
+.loupe-hud{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(11,12,14,0.94);border:1px solid rgba(223,78,22,0.85);box-shadow:0 4px 16px rgba(0,0,0,0.6);color:#FAF9F6;font:700 11px/1 var(--sans);letter-spacing:.05em;padding:5px 12px;border-radius:999px;white-space:nowrap;z-index:7}
+.loupe-cross-v{position:absolute;top:14px;bottom:14px;left:50%;width:1px;background:rgba(223,78,22,0.35);transform:translateX(-50%)}
+.loupe-cross-h{position:absolute;left:14px;right:14px;top:50%;height:1px;background:rgba(223,78,22,0.35);transform:translateY(-50%)}
+.loupe-dot{position:absolute;top:50%;left:50%;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);transform:translate(-50%,-50%)}
+.loupe-flare{position:absolute;width:140px;height:140px;top:15px;left:15px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.35) 0%,rgba(200,164,100,0.1) 40%,transparent 70%);pointer-events:none}
 
 .cinema-skip{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:calc(24px + env(safe-area-inset-right,0px));z-index:10;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:10px 22px;border-radius:999px;background:rgba(11,12,14,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);color:#FAF9F6;font:600 13px/1 var(--sans);cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.65);white-space:nowrap;user-select:none;transition:opacity .25s ease}
 .cinema-skip:hover{background:rgba(223,78,22,.85);border-color:var(--accent)}
 #heroVideoStage.is-docking .cinema-skip, #heroVideoStage.is-docked .cinema-skip{display:none !important;pointer-events:none !important;opacity:0 !important}
 
 #heroVideoStage:not(.is-docked) .inspect-hint,
-#heroVideoStage:not(.is-docked) .cta,
 #heroVideoStage:not(.is-docked) .replay-btn{opacity:0 !important;pointer-events:none !important}
-#heroVideoStage.is-docked .cta{opacity:1;pointer-events:auto}
 #heroVideoStage.is-docked .inspect-hint{opacity:1;pointer-events:auto}
 
-.frame .cta{position:absolute;left:14px;right:14px;bottom:14px;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,0.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:6px 14px 6px 6px;box-shadow:0 18px 40px -16px rgba(0,0,0,0.5);transition:opacity .2s ease}
-.frame .cta .btn{flex:none;min-height:44px;min-width:44px;padding:0 20px;font-size:13px;font-weight:700;border-radius:999px;background:var(--accent);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 14px var(--accent-glow);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.frame .cta p{margin:0;font-size:12px;line-height:1.25;color:#1A1D24;font-weight:600}
+.inspect-hint{position:absolute;bottom:14px;left:14px;z-index:7;background:rgba(11,12,14,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);color:#FAF9F6;font:500 12px/1 var(--sans);padding:6px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+.inspect-hint.hide{opacity:0 !important;transform:translateY(8px);pointer-events:none !important}
 
-/* OPTICAL DETAILING LOUPE (ZONE-AWARE HUD) */
-.car-loupe{position:absolute;top:var(--ly, 50%);left:var(--lx, 50%);width:210px;height:210px;transform:translate3d(-50%,-50%,0);pointer-events:none;z-index:6;opacity:0;transition:opacity .25s ease}
-.frame.is-inspecting .car-loupe{opacity:1}
-.loupe-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,107,53,0.9);box-shadow:0 0 24px rgba(223,78,22,0.5),inset 0 0 20px rgba(200,164,100,0.25);-webkit-backdrop-filter:brightness(1.32) contrast(1.16) saturate(1.22);backdrop-filter:brightness(1.32) contrast(1.16) saturate(1.22);overflow:hidden}
-.loupe-hud{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:rgba(11,12,14,0.94);border:1px solid rgba(255,107,53,0.85);box-shadow:0 4px 16px rgba(0,0,0,0.6);color:#FAF9F6;font:700 12px/1 var(--sans);letter-spacing:.06em;padding:5px 12px;border-radius:999px;white-space:nowrap}
-.loupe-cross-v{position:absolute;top:12px;bottom:12px;left:50%;width:1px;background:rgba(255,107,53,0.4);transform:translateX(-50%)}
-.loupe-cross-h{position:absolute;left:12px;right:12px;top:50%;height:1px;background:rgba(255,107,53,0.4);transform:translateY(-50%)}
-.loupe-dot{position:absolute;top:50%;left:50%;width:6px;height:6px;border-radius:50%;background:#FF6B35;box-shadow:0 0 10px #FF6B35;transform:translate(-50%,-50%)}
-.loupe-flare{position:absolute;width:120px;height:120px;top:15px;left:15px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.35) 0%,rgba(200,164,100,0.1) 40%,transparent 70%);pointer-events:none}
+.replay-btn{position:absolute;top:12px;right:12px;z-index:9;display:inline-flex;align-items:center;gap:6px;min-height:34px;height:34px;min-width:34px;padding:0 12px;border-radius:999px;background:rgba(11,12,14,.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);color:#FAF9F6;font:600 12px/1 var(--sans);cursor:pointer;transition:all .2s;opacity:0;pointer-events:none}
+.replay-btn.is-active{opacity:0.85 !important;pointer-events:auto !important}
+.replay-btn:hover{opacity:1 !important;background:rgba(223,78,22,.4);border-color:var(--accent);color:#fff;transform:scale(1.02)}
+.replay-btn svg{width:13px;height:13px}
 
-.inspect-hint{position:absolute;bottom:74px;left:14px;z-index:7;background:rgba(11,12,14,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);color:#FAF9F6;font:500 12px/1 var(--sans);padding:6px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
-.inspect-hint.hide{opacity:0;transform:translateY(8px)}
-
-.replay-btn{position:absolute;top:14px;right:14px;z-index:9;display:inline-flex;align-items:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;border-radius:999px;background:rgba(11,12,14,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);color:#FAF9F6;font:600 13px/1 var(--sans);cursor:pointer;transition:all .2s;opacity:0;pointer-events:none}
-.replay-btn.is-active{opacity:1 !important;pointer-events:auto !important}
-.replay-btn:hover{background:rgba(223,78,22,.3);border-color:var(--accent);color:#fff;transform:scale(1.03)}
-.replay-btn svg{width:15px;height:15px}
+/* HERO CTA BAR (OUTSIDE AND DIRECTLY BELOW .frame) */
+.hero-cta-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,0.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:6px 14px 6px 6px;box-shadow:0 18px 40px -16px rgba(0,0,0,0.5);margin-top:14px;position:relative;z-index:5}
+.hero-cta-bar .btn{flex:none;min-height:44px;min-width:44px;padding:0 20px;font-size:13px;font-weight:700;border-radius:999px;background:var(--accent);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 14px var(--accent-glow);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.hero-cta-bar p{margin:0;font-size:12px;line-height:1.25;color:#1A1D24;font-weight:600}
 
 #steam{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
 #steam.on{opacity:1}
@@ -198,13 +207,13 @@ section.night{background:var(--night);color:#fff;padding-top:96px !important;pad
 #packages{padding-top:96px !important}
 
 /* S-TIER SECTION HEADERS: 3D SWINGING NUMBER TAGS (ZERO BLUR - ALWAYS RAZOR SHARP) */
-.sh{position:relative;margin-bottom:24px;perspective:800px}
-.sh-num{display:inline-block;color:var(--accent);transform-origin:top center;transform:rotateX(-75deg);opacity:0;transition:transform .55s cubic-bezier(0.16,1,0.3,1),opacity .55s ease;will-change:transform,opacity}
-.sh.in .sh-num, .in .sh-num, .hero.on .sh-num{transform:rotateX(0deg);opacity:1}
-.sh h2{font:700 28px/1.1 var(--display);text-transform:uppercase;letter-spacing:-.01em;opacity:0;transform:translate3d(0,18px,0);transition:opacity .55s cubic-bezier(0.16,1,0.3,1),transform .55s cubic-bezier(0.16,1,0.3,1);transition-delay:70ms;will-change:transform,opacity}
-.sh p{color:var(--muted);font-size:15px;margin-top:6px;opacity:0;transform:translate3d(0,18px,0);transition:opacity .55s cubic-bezier(0.16,1,0.3,1),transform .55s cubic-bezier(0.16,1,0.3,1);transition-delay:140ms;will-change:transform,opacity}
+.sh{position:relative;margin-bottom:24px}
+.sh-num{display:inline-block;color:var(--accent);opacity:1 !important;transform:none !important}
+.sh h2{font:700 28px/1.1 var(--display);text-transform:uppercase;letter-spacing:-.01em;opacity:1 !important;transform:none !important;color:#0B0C0E}
+.night .sh h2{color:#FAF9F6 !important}
+.sh p{color:var(--muted);font-size:15px;margin-top:6px;opacity:1 !important;transform:none !important}
 .night .sh p{color:var(--night-muted)}
-.sh.in h2, .sh.in p, .in h2, .in p, .hero.on h2, .hero.on p{opacity:1;transform:translate3d(0,0,0)}
+.sh.in h2, .sh.in p, .in h2, .in p, .hero.on h2, .hero.on p{opacity:1;transform:none}
 
 /* RATING SUMMARY BANNER */
 .rev-summary-banner{display:flex;align-items:center;gap:16px;background:#F3F1EC;border:1px solid #DCDAE2;border-radius:16px;padding:14px 20px;margin-bottom:24px;box-shadow:0 4px 16px -6px rgba(0,0,0,0.06)}
@@ -411,9 +420,9 @@ dialog#switcherModal::backdrop{background:rgba(9,10,13,.75);-webkit-backdrop-fil
   .facts{gap:10px;margin-bottom:12px;font-size:13px}
   .facts dt{font-size:12px}
   .answer{font-size:13px}
-  .frame .cta p{display:none}
-  .frame .cta{justify-content:center;padding:4px}
-  .frame .cta .btn{width:100%}
+  .hero-cta-bar p{display:none}
+  .hero-cta-bar{justify-content:center;padding:4px}
+  .hero-cta-bar .btn{width:100%}
   #switcherBtnText{display:none}
   .top-switcher-btn{padding:0;width:44px;min-width:44px;justify-content:center}
   .calc-box, .calc-summary{padding:16px 12px}
@@ -452,8 +461,8 @@ dialog#switcherModal::backdrop{background:rgba(9,10,13,.75);-webkit-backdrop-fil
   .typed{grid-column:1;grid-row:1;margin-bottom:8px}
   .stage{grid-column:1;grid-row:2}
   .hero-info{grid-column:2;grid-row:1/span 2;display:flex;flex-direction:column;justify-content:center}
-  .frame{margin-top:8px !important;aspect-ratio:10/7.2}
-  .frame .cta{right:auto;max-width:calc(100% - 24px)}
+  .frame-slot, .frame, #heroVideoStage.is-docked{margin-top:8px !important;aspect-ratio:2.35 / 1 !important}
+  .hero-cta-bar{max-width:100%}
   .hero h1{font-size:clamp(30px,3.2vw,48px);line-height:1.12;margin:0 0 14px}
   .facts{order:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,0.12);font-size:14px}
   .facts dd{font-size:15px}
@@ -541,7 +550,7 @@ dialog#switcherModal::backdrop{background:rgba(9,10,13,.75);-webkit-backdrop-fil
   <div class="wrap">
     
     <div class="typed" id="typedBadge">
-      <span id="typed">Оклейка зон риска полиуретаном</span><span class="caret">|</span>
+      <span id="typed">Оклейка зон риска полиуретаном</span>
     </div>
 
     <div class="stage">
@@ -559,15 +568,23 @@ dialog#switcherModal::backdrop{background:rgba(9,10,13,.75);-webkit-backdrop-fil
 
       <div class="frame-slot" id="heroFrameSlot">
         <div class="frame" id="heroVideoStage">
-          <video id="heroCarVideo" src="/img/hero-entry.mp4" playsinline muted preload="auto" poster="/img/hero-entry-final.jpg"></video>
+          <video id="heroCarVideo" src="../../img/hero-entry.mp4" playsinline muted preload="auto" poster="../../img/hero-entry-final.jpg"></video>
+
+          <!-- True 2-Layer Dusty-to-Clean Wiper Canvas -->
+          <div class="car-wipe-canvas" id="carWipeCanvas" aria-hidden="true">
+            <img class="car-layer car-layer-dusty" src="../../img/car-dusty.jpg" alt="Пыльный кузов до полировки" width="1920" height="818" loading="lazy">
+            <div class="car-layer car-layer-clean" id="carCleanLayer">
+              <img src="../../img/car-clean.jpg" alt="Зеркальный глянец после детейлинга" width="1920" height="818" loading="lazy">
+            </div>
+          </div>
 
           <button id="skipIntroBtn" class="cinema-skip" type="button" aria-label="Пропустить анимацию">
-            <span>Пропустить анимацию ↘</span>
+            <span>Пропустить заставку ↓</span>
           </button>
 
-          <!-- Optical Detailing Loupe (ONE Single Sleek HUD Pill) -->
+          <!-- Optical Detailing Loupe (270px Diameter HUD) -->
           <div class="car-loupe" id="carLoupe" aria-hidden="true">
-            <div class="loupe-hud" id="loupeHud">КУЗОВ · ЗЕРКАЛЬНЫЙ ГЛЯНЕЦ 9H · ОСМОТР CRI 95+</div>
+            <div class="loupe-hud" id="loupeHud">✦ ЗЕРКАЛЬНЫЙ ГЛЯНЕЦ 9H · ПЫЛЬ И РИСКА УДАЛЕНЫ</div>
             <div class="loupe-ring">
               <div class="loupe-cross-v"></div>
               <div class="loupe-cross-h"></div>
@@ -577,21 +594,19 @@ dialog#switcherModal::backdrop{background:rgba(9,10,13,.75);-webkit-backdrop-fil
           </div>
 
           <div class="inspect-hint" id="inspectHint">
-            <span>🔦</span> Наведите курсор на авто для осмотра чистоты ЛКП
+            <span>🔦</span> Наведите курсор или проведите пальцем, чтобы стереть пыль и оценить блеск
           </div>
 
           <button class="replay-btn" id="replayVideoBtn" type="button" aria-label="Повторить заезд">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
             <span>Повторить заезд</span>
           </button>
-
-          <canvas id="steam" width="400" height="288" aria-hidden="true" style="display:none;"></canvas>
-
-          <div class="cta">
-            <a class="btn btn-accent" href="#pick">Подобрать защиту</a>
-            <p>Рассчитайте точную смету за 20 секунд, без звонка</p>
-          </div>
         </div>
+      </div>
+
+      <div class="hero-cta-bar cta">
+        <a class="btn btn-accent" href="#pick">Подобрать защиту</a>
+        <p>Рассчитайте точную смету за 20 секунд, без звонка</p>
       </div>
     </div>
 
@@ -1630,7 +1645,7 @@ function applyStudio(st){
 }
 
 /* Load Studios JSON */
-fetch("/studios-tula.json")
+fetch("../../studios-tula.json")
   .then(function(r){ return r.json(); })
   .then(function(data){
     allStudios = data;
@@ -1761,7 +1776,7 @@ $$("[data-copy-addr]").forEach(function(el){
   });
 });
 
-/* Typing badge effect */
+/* Typing badge effect (Smooth Vertical Slide / Fade Full-Phrase Transition) */
 var TYPED_WORDS = [
   "Оклейка зон риска полиуретаном",
   "Восстановительная полировка кузова",
@@ -1771,21 +1786,21 @@ var TYPED_WORDS = [
 ];
 (function(){
   var el = $("#typed"); if(!el) return;
-  var wIdx = 0, chIdx = 0, isDeleting = false;
-  function tick(){
-    var cur = TYPED_WORDS[wIdx];
-    if(isDeleting){
-      chIdx--;
-      el.textContent = cur.substring(0, chIdx);
-      if(chIdx === 0){ isDeleting = false; wIdx = (wIdx + 1) % TYPED_WORDS.length; setTimeout(tick, 450); return; }
-    } else {
-      chIdx++;
-      el.textContent = cur.substring(0, chIdx);
-      if(chIdx === cur.length){ isDeleting = true; setTimeout(tick, 2200); return; }
-    }
-    setTimeout(tick, isDeleting ? 38 : 75);
-  }
-  setTimeout(tick, 600);
+  var wIdx = 0;
+  setInterval(function(){
+    var badge = el.parentElement;
+    if (!badge) return;
+    badge.classList.add("fade-out");
+    setTimeout(function(){
+      wIdx = (wIdx + 1) % TYPED_WORDS.length;
+      el.textContent = TYPED_WORDS[wIdx];
+      badge.classList.remove("fade-out");
+      badge.classList.add("fade-in");
+      setTimeout(function(){
+        badge.classList.remove("fade-in");
+      }, 350);
+    }, 320);
+  }, 3500);
 })();
 
 /* Dynamic Slots Generation */
@@ -2086,6 +2101,7 @@ $$("[data-scroll-to]").forEach(function(btn){
       heroSec.classList.add('on');
     }
     if (replayBtn) replayBtn.classList.add('is-active');
+    if (window.__scheduleLoupeDemo) window.__scheduleLoupeDemo();
   }
 
   function startDocking() {
@@ -2141,6 +2157,7 @@ $$("[data-scroll-to]").forEach(function(btn){
     replayBtn.addEventListener('click', function(e) {
       e.stopPropagation();
       replayBtn.classList.remove('is-active');
+      stage.classList.remove('is-inspecting');
       try {
         vid.currentTime = 0.3;
         var p = vid.play();
@@ -2203,44 +2220,129 @@ $$("[data-scroll-to]").forEach(function(btn){
   }
 })();
 
-/* OPTICAL DETAILING LOUPE (ZONE-AWARE HUD) - ONLY ACTIVE AFTER ON_DOCK_COMPLETE */
-(function initOpticalLoupe(){
+/* TRUE DUSTY-TO-CLEAN WIPER & OPTICAL LOUPE ENGINE */
+(function initDustyToCleanWiper(){
   var stage = document.getElementById('heroVideoStage');
   var loupe = document.getElementById('carLoupe');
   var hud = document.getElementById('loupeHud');
   var hint = document.getElementById('inspectHint');
-  if (!stage || !loupe || !hud) return;
+  if (!stage || !loupe) return;
 
-  stage.addEventListener('pointerenter', function(){
-    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
-    if (hint) { hint.style.opacity = '0'; hint.style.pointerEvents = 'none'; }
+  var hasInteracted = false;
+  var demoTimer = null;
+  var demoRaf = null;
+
+  function setLoupePos(x, y) {
+    var r = stage.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return;
+    var relX = Math.max(0, Math.min(x - r.left, r.width));
+    var relY = Math.max(0, Math.min(y - r.top, r.height));
+
+    stage.style.setProperty('--lx', relX + 'px');
+    stage.style.setProperty('--ly', relY + 'px');
+    stage.style.setProperty('--mx', relX + 'px');
+    stage.style.setProperty('--my', relY + 'px');
+
+    if (hud) {
+      var xp = (relX / r.width) * 100;
+      var yp = (relY / r.height) * 100;
+      if (xp < 38) {
+        hud.textContent = '✦ КАПОТ И ФАРЫ · БРОНЕПЛЁНКА 200 МКМ · 0% СКОЛОВ';
+      } else if (yp < 42) {
+        hud.textContent = '✦ КРЫША И СТОЙКИ · ГИДРОФОБНЫЙ УГОЛ 115°';
+      } else {
+        hud.textContent = '✦ ЗЕРКАЛЬНЫЙ ГЛЯНЕЦ 9H · ПЫЛЬ И РИСКА УДАЛЕНЫ';
+      }
+    }
+  }
+
+  function stopDemo() {
+    if (demoTimer) { clearTimeout(demoTimer); demoTimer = null; }
+    if (demoRaf) { cancelAnimationFrame(demoRaf); demoRaf = null; }
+  }
+
+  function startDemoSweep() {
+    if (hasInteracted || !window.__onDockComplete || !stage.classList.contains('is-docked')) return;
     stage.classList.add('is-inspecting');
+    var startTime = performance.now();
+    var duration = 2400; // 2.4s sweep
+
+    function step(now) {
+      if (hasInteracted) {
+        stage.classList.remove('is-inspecting');
+        return;
+      }
+      var elapsed = now - startTime;
+      var t = Math.min(1, elapsed / duration);
+      var ease = 0.5 - 0.5 * Math.cos(t * Math.PI);
+      var r = stage.getBoundingClientRect();
+      var x = r.left + r.width * (0.24 + 0.52 * ease);
+      var y = r.top + r.height * 0.52;
+      setLoupePos(x, y);
+
+      if (t < 1) {
+        demoRaf = requestAnimationFrame(step);
+      } else {
+        stage.classList.remove('is-inspecting');
+      }
+    }
+    demoRaf = requestAnimationFrame(step);
+  }
+
+  function onUserStart() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      stopDemo();
+      if (hint) hint.classList.add('hide');
+    }
+  }
+
+  stage.addEventListener('pointerenter', function(e) {
+    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
+    onUserStart();
+    stage.classList.add('is-inspecting');
+    setLoupePos(e.clientX, e.clientY);
   });
 
-  stage.addEventListener('pointerleave', function(){
+  stage.addEventListener('pointermove', function(e) {
+    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
+    onUserStart();
+    stage.classList.add('is-inspecting');
+    setLoupePos(e.clientX, e.clientY);
+  });
+
+  stage.addEventListener('pointerleave', function() {
     stage.classList.remove('is-inspecting');
   });
 
-  stage.addEventListener('pointermove', function(e){
+  // Mobile touch support
+  stage.addEventListener('touchstart', function(e) {
     if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
+    onUserStart();
     stage.classList.add('is-inspecting');
-    if (hint) { hint.style.opacity = '0'; hint.style.pointerEvents = 'none'; }
-    var r = stage.getBoundingClientRect();
-    var x = e.clientX - r.left;
-    var y = e.clientY - r.top;
-    stage.style.setProperty('--lx', x + 'px');
-    stage.style.setProperty('--ly', y + 'px');
-
-    var xp = (x / r.width) * 100;
-    var yp = (y / r.height) * 100;
-    if (xp < 38) {
-      hud.textContent = 'КАПОТ И ФАРЫ · БРОНЕПЛЁНКА 200 МКМ · 0% СКОЛОВ';
-    } else if (yp < 42) {
-      hud.textContent = 'КРЫША И СТОЙКИ · ГИДРОФОБНЫЙ УГОЛ 115°';
-    } else {
-      hud.textContent = 'КУЗОВ · ЗЕРКАЛЬНЫЙ ГЛЯНЕЦ 9H · ОСМОТР CRI 95+';
+    if (e.touches && e.touches[0]) {
+      setLoupePos(e.touches[0].clientX, e.touches[0].clientY);
     }
+  }, { passive: true });
+
+  stage.addEventListener('touchmove', function(e) {
+    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
+    onUserStart();
+    stage.classList.add('is-inspecting');
+    if (e.touches && e.touches[0]) {
+      setLoupePos(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  stage.addEventListener('touchend', function() {
+    setTimeout(function() {
+      stage.classList.remove('is-inspecting');
+    }, 1200);
   });
+
+  window.__scheduleLoupeDemo = function() {
+    demoTimer = setTimeout(startDemoSweep, 1200);
+  };
 })();
 
 /* ROCK-SOLID INTERSECTION OBSERVER (TRIGGER EARLIER WITH CRISP MOTION) */
