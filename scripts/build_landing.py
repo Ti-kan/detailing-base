@@ -9,8 +9,8 @@ with open(STUDIOS_FILE, "r", encoding="utf-8") as f:
     studios = json.load(f)
 
 def split_words(text):
-    words = text.split()
-    return " ".join(f'<span class="w-mask"><span class="w-in" style="--wi:{i}">{w}</span></span>' for i, w in enumerate(words))
+    words = text.strip().split()
+    return " ".join(f'<span class="w-mask"><span class="w-in w-reveal" style="--wi:{i}">{w}</span></span>' for i, w in enumerate(words))
 
 def fmt_rub(n):
     return f"{int(round(n)):,}".replace(",", "\u00a0") + "\u00a0₽"
@@ -20,10 +20,12 @@ def generate_html(studio=None, is_static_route=False):
     
     # Audit logic
     if s.get("audit_answered", False):
-        badge_text = s.get("audit_badge", "⚡️ Быстрый ответ в чате")
+        raw_badge = s.get("audit_badge", "Быстрый ответ в чате")
+        badge_text = raw_badge.replace("⚡️", "").replace("⚡", "").strip()
         quote_text = s.get("audit_quote", "«Работаем сертифицированным полиуретаном с гарантией по договору.»")
     else:
-        badge_text = f"★ {s.get('rating_ya', 5.0):.1f} ТОП Тулы · {s.get('reviews_ya', 20)} отзывов"
+        raw_badge = f"★ {s.get('rating_ya', 5.0):.1f} ТОП Тулы · {s.get('reviews_ya', 20)} отзывов"
+        badge_text = raw_badge.replace("⚡️", "").replace("⚡", "").strip()
         quote_text = f"«В студии {s['name']} соблюдаются регламенты чистой зоны: обеспыленный микроклимат, раскрой по лекалам без ножа по лаку и гарантия {s.get('warranty_years', '5 лет')}.»"
 
     title = f"{s['name']} — Детейлинг & Оклейка авто в Туле ({s['address']})"
@@ -183,20 +185,27 @@ body:not(.hero-entered) .hero .frame-slot{{position:relative;z-index:99999}}
 #heroVideoStage.is-docked video{{width:100%;height:100%;object-fit:cover}}
 
 /* TRUE DUSTY-TO-CLEAN 2-LAYER REVEAL ENGINE */
-.car-wipe-canvas{{position:absolute;inset:0;width:100%;height:100%;z-index:3;opacity:0;pointer-events:none;transition:opacity .4s ease}}
+.car-wipe-canvas{{position:absolute;inset:0;width:100%;height:100%;z-index:3;opacity:0;pointer-events:none;transition:opacity .4s ease;cursor:none}}
 #heroVideoStage.is-docked .car-wipe-canvas{{opacity:1;pointer-events:auto}}
+#heroVideoStage.is-docked .car-wipe-canvas *{{cursor:none}}
 .car-wipe-canvas img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none;pointer-events:none}}
-.car-layer-clean{{position:absolute;inset:0;width:100%;height:100%;-webkit-mask-image:radial-gradient(circle 135px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 75%, rgba(0,0,0,0) 100%);mask-image:radial-gradient(circle 135px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 75%, rgba(0,0,0,0) 100%)}}
+.car-layer-clean{{position:absolute;inset:0;width:100%;height:100%;-webkit-mask-image:radial-gradient(circle 48px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 72%, rgba(0,0,0,0.35) 90%, transparent 100%);mask-image:radial-gradient(circle 48px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 72%, rgba(0,0,0,0.35) 90%, transparent 100%)}}
 
-/* OPTICAL DETAILING LOUPE (270PX DIAMETER HUD) */
-.car-loupe{{position:absolute;top:var(--ly, -999px);left:var(--lx, -999px);width:270px;height:270px;transform:translate3d(-50%,-50%,0);pointer-events:none;z-index:6;opacity:0;transition:opacity .25s ease}}
+/* PURE 96PX JEWEL OPTICAL LENS (NO CROSSHAIR, NO TEXT BADGE) */
+.car-loupe{{position:absolute;top:var(--my, -999px);left:var(--mx, -999px);width:96px;height:96px;border-radius:50%;transform:translate3d(-50%,-50%,0);pointer-events:none;z-index:6;border:1.5px solid rgba(255,255,255,0.55);box-shadow:0 0 20px rgba(223,78,22,0.28),inset 0 0 14px rgba(255,255,255,0.22);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.12) 0%,transparent 60%);opacity:0;transition:opacity .2s ease}}
 .frame.is-inspecting .car-loupe{{opacity:1}}
-.loupe-ring{{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(223,78,22,0.85);box-shadow:0 0 24px rgba(223,78,22,0.45),inset 0 0 20px rgba(200,164,100,0.2);overflow:hidden;-webkit-backdrop-filter:brightness(1.18) contrast(1.12);backdrop-filter:brightness(1.18) contrast(1.12)}}
-.loupe-hud{{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(11,12,14,0.94);border:1px solid rgba(223,78,22,0.85);box-shadow:0 4px 16px rgba(0,0,0,0.6);color:#FAF9F6;font:700 11px/1 var(--sans);letter-spacing:.05em;padding:5px 12px;border-radius:999px;white-space:nowrap;z-index:7}}
-.loupe-cross-v{{position:absolute;top:14px;bottom:14px;left:50%;width:1px;background:rgba(223,78,22,0.35);transform:translateX(-50%)}}
-.loupe-cross-h{{position:absolute;left:14px;right:14px;top:50%;height:1px;background:rgba(223,78,22,0.35);transform:translateY(-50%)}}
-.loupe-dot{{position:absolute;top:50%;left:50%;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);transform:translate(-50%,-50%)}}
-.loupe-flare{{position:absolute;width:140px;height:140px;top:15px;left:15px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.35) 0%,rgba(200,164,100,0.1) 40%,transparent 70%);pointer-events:none}}
+
+@media (max-width: 899px){{
+  .car-layer-clean{{-webkit-mask-image:radial-gradient(circle 38px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 72%, rgba(0,0,0,0.35) 90%, transparent 100%);mask-image:radial-gradient(circle 38px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 72%, rgba(0,0,0,0.35) 90%, transparent 100%)}}
+  .car-loupe{{width:76px;height:76px}}
+}}
+
+/* IN-FRAME VIDEO REPLAY MODE */
+#heroVideoStage.is-replaying .car-wipe-canvas{{opacity:0 !important;pointer-events:none !important}}
+#heroVideoStage.is-replaying .car-loupe{{opacity:0 !important;pointer-events:none !important}}
+#heroVideoStage.is-replaying video{{opacity:1 !important;z-index:4 !important;pointer-events:none !important}}
+#heroVideoStage.is-replaying .inspect-hint{{opacity:0 !important;pointer-events:none !important}}
+#heroVideoStage.is-replaying .replay-btn{{pointer-events:none !important;opacity:.95 !important;background:rgba(223,78,22,.65) !important;border-color:var(--accent) !important;color:#fff !important}}
 
 .cinema-skip{{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:calc(24px + env(safe-area-inset-right,0px));z-index:10;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:10px 22px;border-radius:999px;background:rgba(11,12,14,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);color:#FAF9F6;font:600 13px/1 var(--sans);cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.65);white-space:nowrap;user-select:none;transition:opacity .25s ease}}
 .cinema-skip:hover{{background:rgba(223,78,22,.85);border-color:var(--accent)}}
@@ -209,7 +218,8 @@ body:not(.hero-entered) .hero .frame-slot{{position:relative;z-index:99999}}
 .inspect-hint{{position:absolute;bottom:14px;left:14px;z-index:7;background:rgba(11,12,14,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);color:#FAF9F6;font:500 12px/1 var(--sans);padding:6px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;pointer-events:none;transition:opacity .35s ease,transform .35s ease}}
 .inspect-hint.hide{{opacity:0 !important;transform:translateY(8px);pointer-events:none !important}}
 
-.replay-btn{{position:absolute;top:12px;right:12px;z-index:9;display:inline-flex;align-items:center;gap:6px;min-height:34px;height:34px;min-width:34px;padding:0 12px;border-radius:999px;background:rgba(11,12,14,.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);color:#FAF9F6;font:600 12px/1 var(--sans);cursor:pointer;transition:all .2s;opacity:0;pointer-events:none}}
+.replay-btn{{position:absolute;top:12px;right:12px;z-index:9;display:inline-flex;align-items:center;gap:6px;min-height:34px;height:34px;min-width:34px;padding:0 12px;border-radius:999px;background:rgba(11,12,14,.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);color:#FAF9F6;font:600 12px/1 var(--sans);cursor:pointer !important;pointer-events:auto;transition:all .2s;opacity:0}}
+.replay-btn *{{cursor:pointer !important}}
 .replay-btn.is-active{{opacity:0.85 !important;pointer-events:auto !important}}
 .replay-btn:hover{{opacity:1 !important;background:rgba(223,78,22,.4);border-color:var(--accent);color:#fff;transform:scale(1.02)}}
 .replay-btn svg{{width:13px;height:13px}}
@@ -247,14 +257,36 @@ section.paper{{background:var(--paper);padding-bottom:48px;margin-top:36px}}
 section.night{{background:var(--night);color:#fff;padding-top:96px !important;padding-bottom:52px;margin-top:36px;position:relative;overflow:hidden}}
 #packages{{padding-top:96px !important}}
 
-/* S-TIER SECTION HEADERS: 3D SWINGING NUMBER TAGS (ZERO BLUR - ALWAYS RAZOR SHARP) */
-.sh{{position:relative;margin-bottom:24px}}
-.sh-num{{display:inline-block;color:var(--accent);opacity:1 !important;transform:none !important}}
-.sh h2{{font:700 28px/1.1 var(--display);text-transform:uppercase;letter-spacing:-.01em;opacity:1 !important;transform:none !important;color:#0B0C0E}}
-.night .sh h2{{color:#FAF9F6 !important}}
-.sh p{{color:var(--muted);font-size:15px;margin-top:6px;opacity:1 !important;transform:none !important}}
-.night .sh p{{color:var(--night-muted)}}
-.sh.in h2, .sh.in p, .in h2, .in p, .hero.on h2, .hero.on p{{opacity:1;transform:none}}
+/* SECTION HEADERS (3D STUDIO NUMBER TAGS + EYEBROW + KINETIC WORD REVEAL) */
+.sh{{position:relative;margin-bottom:28px}}
+.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display, var(--sans));border-radius:18px 18px 0 18px;box-shadow:0 8px 24px rgba(223,78,22,0.35);opacity:0;transform:perspective(600px) rotateY(-35deg) scale(0.9);transition:transform .65s cubic-bezier(.16,1,.3,1),opacity .5s ease;transition-delay:60ms}}
+.sh .num::before{{content:"";position:absolute;right:0;bottom:-12px;width:12px;height:12px;background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent) 13px)}}
+.night .sh .num{{background:var(--accent-on-dark);color:#0B0C0E;box-shadow:0 8px 24px rgba(223,78,22,0.45)}}
+.night .sh .num::before{{background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent-on-dark) 13px)}}
+.sh.on .num, .sh.in .num, .on .sh .num, .in .sh .num, html.no-anim .sh .num{{opacity:1 !important;transform:perspective(600px) rotateY(0deg) scale(1) !important}}
+
+.sh-t{{position:relative;padding:4px 0 0 70px}}
+.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;transition-delay:0ms}}
+.night .eyebrow{{color:var(--accent-on-dark)}}
+.sh.on .eyebrow, .sh.in .eyebrow, .on .eyebrow, .in .eyebrow, html.no-anim .eyebrow{{opacity:1 !important;transform:none !important}}
+
+.sh h2{{font:700 32px/1.16 var(--display, var(--sans));text-transform:uppercase;margin-top:4px;color:#0B0C0E !important;overflow:visible !important;padding-bottom:0.22em !important}}
+.night .sh h2{{color:#FFFFFF !important}}
+
+.sh .lead{{margin-top:10px;color:var(--muted);font-size:15px;line-height:1.55;max-width:65ch;opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;transition-delay:220ms}}
+.night .sh .lead{{color:var(--night-muted)}}
+.sh.on .lead, .sh.in .lead, .on .lead, .in .lead, html.no-anim .lead{{opacity:1 !important;transform:none !important}}
+
+/* Kinetic Staggered Word Reveal */
+.w-mask{{display:inline-block;overflow:visible !important;vertical-align:bottom;line-height:inherit;padding-top:0.12em;margin-top:-0.12em;padding-bottom:0.2em}}
+.w-in, .w-reveal{{display:inline-block;transform:translate3d(0,32px,0);opacity:0;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .5s ease;will-change:transform,opacity;transition-delay:calc(var(--wi, 0) * 45ms)}}
+.sh.on .w-in, .sh.on .w-reveal, .sh.in .w-in, .sh.in .w-reveal, .on .w-in, .on .w-reveal, .in .w-in, .in .w-reveal, html.no-anim .w-in, html.no-anim .w-reveal{{transform:translate3d(0,0,0) !important;opacity:1 !important}}
+
+@media (max-width: 899px){{
+  .sh .num{{width:44px;height:56px;font-size:20px;border-radius:14px 14px 0 14px}}
+  .sh-t{{padding-left:58px}}
+  .sh h2{{font-size:24px;line-height:1.2}}
+}}
 
 /* RATING SUMMARY BANNER */
 .rev-summary-banner{{display:flex;align-items:center;gap:16px;background:#F3F1EC;border:1px solid #DCDAE2;border-radius:16px;padding:14px 20px;margin-bottom:24px;box-shadow:0 4px 16px -6px rgba(0,0,0,0.06)}}
@@ -623,16 +655,8 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
             <span>Пропустить заставку ↓</span>
           </button>
 
-          <!-- Optical Detailing Loupe (270px Diameter HUD) -->
-          <div class="car-loupe" id="carLoupe" aria-hidden="true">
-            <div class="loupe-hud" id="loupeHud">✦ ЗЕРКАЛЬНЫЙ ГЛЯНЕЦ 9H · ПЫЛЬ И РИСКА УДАЛЕНЫ</div>
-            <div class="loupe-ring">
-              <div class="loupe-cross-v"></div>
-              <div class="loupe-cross-h"></div>
-              <div class="loupe-flare"></div>
-              <div class="loupe-dot"></div>
-            </div>
-          </div>
+          <!-- Pure 96px Jewel Optical Lens -->
+          <div class="car-loupe" id="carLoupe" aria-hidden="true"></div>
 
           <div class="inspect-hint" id="inspectHint">
             <span>🔦</span> Наведите курсор или проведите пальцем, чтобы стереть пыль и оценить блеск
@@ -717,9 +741,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 01. SLOTS IN BAY -->
 <section class="s" id="slots-s" aria-labelledby="h-slots">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-slots"><span class="sh-num">01</span> / Свободные окна в бокс на ближайшие дни</h2>
-      <p>Бронируйте окно онлайн — фиксируем бокс и мастера за вашим автомобилем</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">01</span>
+      <div class="sh-t">
+        <p class="eyebrow">Бронирование бокса онлайн</p>
+        <h2 id="h-slots">{split_words("Свободные окна в бокс на ближайшие дни")}</h2>
+        <p class="lead">Бронируйте окно онлайн — фиксируем бокс и мастера за вашим автомобилем</p>
+      </div>
     </div>
 
     <ul class="slots" id="slotsList">
@@ -732,9 +760,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 02. INTERACTIVE CALCULATOR -->
 <section class="s paper" id="pick" aria-labelledby="h-calc">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-calc"><span class="sh-num">02</span> / Онлайн-калькулятор зон риска и защиты</h2>
-      <p>Выберите класс кузова и необходимые опции — точная стоимость пересчитывается мгновенно</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">02</span>
+      <div class="sh-t">
+        <p class="eyebrow">Расчёт стоимости за 20 секунд</p>
+        <h2 id="h-calc">{split_words("Онлайн-калькулятор зон риска и защиты")}</h2>
+        <p class="lead">Выберите класс кузова и необходимые опции — точная стоимость пересчитывается мгновенно</p>
+      </div>
     </div>
 
     <div class="calc-grid">
@@ -883,9 +915,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <section class="s night" id="packages" aria-labelledby="h-packages">
   <div class="night-glow" id="nightGlow"></div>
   <div class="wrap" style="position:relative;z-index:2">
-    <div class="sh">
-      <h2 id="h-packages"><span class="sh-num">03</span> / Готовые пакеты защиты и сравнение ДО / ПОСЛЕ</h2>
-      <p>Потяните слайдер в центре, чтобы сравнить состояние ЛКП BMW M8 до и после полировки с полиуретаном</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">03</span>
+      <div class="sh-t">
+        <p class="eyebrow">Премиальный полиуретан 200 мкм</p>
+        <h2 id="h-packages">{split_words("Готовые пакеты защиты и сравнение ДО / ПОСЛЕ")}</h2>
+        <p class="lead">Потяните слайдер в центре, чтобы сравнить состояние ЛКП BMW M8 до и после полировки с полиуретаном</p>
+      </div>
     </div>
 
     <!-- TOUCH/MOUSE DRAGGABLE BEFORE/AFTER SLIDER (BMW M8) -->
@@ -968,9 +1004,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 04. PRICING & INCLUDED -->
 <section class="s" id="price" aria-labelledby="h-price">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-price"><span class="sh-num">04</span> / Прозрачный прайс-лист и что входит (0 ₽)</h2>
-      <p>Никаких скрытых наценок: фиксируем точную стоимость в заказ-наряде до начала работ</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">04</span>
+      <div class="sh-t">
+        <p class="eyebrow">Фиксированная цена в заказ-наряде</p>
+        <h2 id="h-price">{split_words("Прозрачный прайс-лист и что входит (0 ₽)")}</h2>
+        <p class="lead">Никаких скрытых наценок: фиксируем точную стоимость в заказ-наряде до начала работ</p>
+      </div>
     </div>
 
     <div class="ptable-wrap" style="overflow-x:auto;width:100%;-webkit-overflow-scrolling:touch">
@@ -1052,9 +1092,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 05. TECH STANDARDS & STAGES -->
 <section class="s paper" id="tech" aria-labelledby="h-tech">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-tech"><span class="sh-num">05</span> / Стандарты чистоты бокса и регламент работ</h2>
-      <p>Оборудование и технологический процесс, исключающий пыль под пленкой и повреждение лака</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">05</span>
+      <div class="sh-t">
+        <p class="eyebrow">Чистая зона без пыли</p>
+        <h2 id="h-tech">{split_words("Стандарты чистоты бокса и регламент работ")}</h2>
+        <p class="lead">Оборудование и технологический процесс, исключающий пыль под пленкой и повреждение лака</p>
+      </div>
     </div>
 
     <div class="tech-grid">
@@ -1085,9 +1129,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 06. REVIEWS (12 Authentic Tula Car Reviews · 2-Row Kinetic Marquee) -->
 <section class="s" id="reviews" aria-labelledby="h-rev">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-rev"><span class="sh-num">06</span> / Отзывы автовладельцев Тулы</h2>
-      <p>Реальные впечатления клиентов о качестве оклейки, полировки и защите от сколов на трассах Тульской области</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">06</span>
+      <div class="sh-t">
+        <p class="eyebrow">Проверенная репутация в Туле</p>
+        <h2 id="h-rev">{split_words("Отзывы автовладельцев Тулы")}</h2>
+        <p class="lead">Реальные впечатления клиентов о качестве оклейки, полировки и защите от сколов на трассах Тульской области</p>
+      </div>
     </div>
 
     <div class="rev-summary-banner">
@@ -1405,9 +1453,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 07. STUDIO ADDRESS & INSPECTION -->
 <section class="s paper" id="where" aria-labelledby="h-where">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-where"><span class="sh-num">07</span> / Адрес студии и бесплатный осмотр ЛКП</h2>
-      <p>Ждем вас на осмотр состояния лакокрасочного покрытия под специализированными лампами CRI 95+</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">07</span>
+      <div class="sh-t">
+        <p class="eyebrow">Специализированное освещение CRI 95+</p>
+        <h2 id="h-where">{split_words("Адрес студии и бесплатный осмотр ЛКП")}</h2>
+        <p class="lead">Ждем вас на осмотр состояния лакокрасочного покрытия под специализированными лампами CRI 95+</p>
+      </div>
     </div>
 
     <div class="contacts-grid">
@@ -1463,9 +1515,13 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 <!-- 08. HOW TO BOOK & CONTRACT WARRANTY -->
 <section class="s" id="contacts" aria-labelledby="h-contacts">
   <div class="wrap">
-    <div class="sh">
-      <h2 id="h-contacts"><span class="sh-num">08</span> / Как записаться и гарантия по договору</h2>
-      <p>Официальное оформление, акт приёмки автомобиля и гарантия {s.get('warranty_years', 'до 5 лет')}</p>
+    <div class="sh reveal">
+      <span class="num" aria-hidden="true">08</span>
+      <div class="sh-t">
+        <p class="eyebrow">Официальное оформление</p>
+        <h2 id="h-contacts">{split_words("Как записаться и гарантия по договору")}</h2>
+        <p class="lead">Официальное оформление, акт приёмки автомобиля и гарантия {s.get('warranty_years', 'до 5 лет')}</p>
+      </div>
     </div>
 
     <div class="tech-grid" style="margin-bottom:28px">
@@ -1645,7 +1701,7 @@ function applyStudio(st){{
   var hReviews = $("#heroReviews"); if(hReviews) hReviews.textContent = st.reviews_ya;
   var hAddr = $("#heroAddr"); if(hAddr){{ hAddr.textContent = st.address.replace(/^тула,?\\s*/i, ''); hAddr.setAttribute("data-copy-addr", st.address); }}
   var hPhone = $("#heroPhone"); if(hPhone){{ hPhone.textContent = st.phone; hPhone.href = "tel:+" + st.phone_digits; }}
-  var hBadgeText = $("#heroBadgeText"); if(hBadgeText) hBadgeText.textContent = st.audit_badge;
+  var hBadgeText = $("#heroBadgeText"); if(hBadgeText) hBadgeText.textContent = (st.audit_badge || "").replace(/⚡️|⚡/g, "").trim();
   var hQuote = $("#heroQuote"); if(hQuote) hQuote.textContent = st.audit_quote;
 
   // Calculator defaults
@@ -1755,7 +1811,7 @@ function renderSwitcherList(list){{
         '<div class="sw-item-title">' + item.name + '</div>' +
         '<div class="sw-item-meta">★ ' + item.rating_ya.toFixed(1) + ' · ' + item.address + '</div>' +
       '</div>' +
-      '<div class="sw-item-badge">' + item.audit_badge + '</div>' +
+      '<div class="sw-item-badge">' + (item.audit_badge || '').replace(/⚡️|⚡/g, '').trim() + '</div>' +
     '</button>';
   }}).join("");
 
@@ -2194,16 +2250,29 @@ $$("[data-scroll-to]").forEach(function(btn){{
     }});
   }}
 
+  function finishInFrameReplay() {{
+    if (stage.classList.contains('is-replaying')) {{
+      stage.classList.remove('is-replaying');
+      vid.pause();
+      var btnSpan = replayBtn.querySelector('span');
+      if (btnSpan) btnSpan.textContent = 'Повторить заезд';
+      replayBtn.classList.add('is-active');
+    }}
+  }}
+
   if (replayBtn) {{
     replayBtn.addEventListener('click', function(e) {{
       e.stopPropagation();
-      replayBtn.classList.remove('is-active');
+      if (stage.classList.contains('is-replaying')) return;
+      stage.classList.add('is-replaying');
       stage.classList.remove('is-inspecting');
+      var btnSpan = replayBtn.querySelector('span');
+      if (btnSpan) btnSpan.textContent = '● Идёт заезд...';
       try {{
-        vid.currentTime = 0.3;
+        vid.currentTime = 0.2;
         var p = vid.play();
         if (p && p.catch) p.catch(function() {{}});
-      }} catch(e) {{}}
+      }} catch(err) {{}}
     }});
   }}
 
@@ -2211,7 +2280,7 @@ $$("[data-scroll-to]").forEach(function(btn){{
     if (!isDocked && !isDocking) {{
       startDocking();
     }} else {{
-      vid.pause();
+      finishInFrameReplay();
       if (replayBtn) replayBtn.classList.add('is-active');
     }}
   }});
@@ -2221,10 +2290,9 @@ $$("[data-scroll-to]").forEach(function(btn){{
       if (vid.duration && vid.currentTime >= vid.duration - 0.08) {{
         startDocking();
       }}
-    }} else {{
+    }} else if (stage.classList.contains('is-replaying')) {{
       if (vid.duration && vid.currentTime >= vid.duration - 0.08) {{
-        vid.pause();
-        if (replayBtn) replayBtn.classList.add('is-active');
+        finishInFrameReplay();
       }}
     }}
   }});
