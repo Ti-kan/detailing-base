@@ -405,14 +405,19 @@ body:not(.no-js) .tech-item.in{{opacity:1;transform:translate3d(0,0,0)}}
 .pk-price{{margin-top:auto;font:700 24px/1 var(--display);color:#fff;margin-bottom:14px}}
 
 /* 04. PRICING & INCLUDED */
-.price-table{{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px}}
-@media (max-width: 767px){{
-  .price-table{{min-width:480px}}
-}}
+.price-table, .ptable{{width:100%;min-width:0;border-collapse:collapse;margin-bottom:24px;font-size:14px}}
 .price-table th{{text-align:left;font:700 13px/1 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 14px;border-bottom:2px solid var(--line)}}
 .price-table td{{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--ink-2)}}
 .price-table tr:hover td{{background:var(--paper)}}
 .price-table .p-val{{font-weight:700;color:var(--accent);text-align:right;white-space:nowrap}}
+.price-table td:first-child .sub{{display:none}}
+@media (max-width: 600px){{
+  .price-table th:nth-child(2), .price-table td:nth-child(2){{display:none}}
+  .price-table td:first-child .sub{{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:3px;line-height:1.35}}
+  .price-table th:first-child, .price-table td:first-child{{white-space:normal;word-break:break-word;padding-right:8px;font-size:14px}}
+  .price-table .p-val, .price-table th:last-child{{white-space:nowrap;text-align:right;font-size:14px;padding:12px 4px}}
+  .ptable-wrap{{padding:0}}
+}}
 
 .included-box{{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;margin-top:24px}}
 .included-title{{font:700 18px/1.2 var(--display);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:14px}}
@@ -1052,37 +1057,37 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       </thead>
       <tbody>
         <tr>
-          <td><strong>Оклейка «Зоны риска»</strong></td>
+          <td><strong>Оклейка «Зоны риска»</strong><span class="sub">Капот целиком, бампер, фары, зеркала, стойки, крыша 20 см</span></td>
           <td>Капот целиком, бампер, фары, зеркала, стойки, крыша 20 см</td>
           <td class="p-val" id="priceTableZones">от {price_zones_fmt}</td>
         </tr>
         <tr>
-          <td><strong>Полная оклейка кузова</strong></td>
+          <td><strong>Полная оклейка кузова</strong><span class="sub">Все внешние металлические и пластиковые элементы с подворотом</span></td>
           <td>Все внешние металлические и пластиковые элементы с подворотом</td>
           <td class="p-val">от 150 000 ₽</td>
         </tr>
         <tr>
-          <td><strong>Восстановительная полировка</strong></td>
+          <td><strong>Восстановительная полировка</strong><span class="sub">3 этапа полировки ЛКП, удаление голограмм, глубокий блеск</span></td>
           <td>3 этапа полировки ЛКП, удаление голограмм, глубокий блеск</td>
           <td class="p-val" id="priceTablePoly">от {price_poly_fmt}</td>
         </tr>
         <tr>
-          <td><strong>Керамика кузова (2 слоя)</strong></td>
+          <td><strong>Керамика кузова (2 слоя)</strong><span class="sub">Подложка 9H + гидрофобный финишный слой + термосушка</span></td>
           <td>Подложка 9H + гидрофобный финишный слой + термосушка</td>
           <td class="p-val" id="priceTableCeramics">от {price_ceramics_fmt}</td>
         </tr>
         <tr>
-          <td><strong>Бронь лобового стекла</strong></td>
+          <td><strong>Бронь лобового стекла</strong><span class="sub">Пленка толщиной 112 мкм с гидрофобным слоем</span></td>
           <td>Пленка толщиной 112 мкм с гидрофобным слоем</td>
           <td class="p-val">от 14 000 ₽</td>
         </tr>
         <tr>
-          <td><strong>Химчистка салона</strong></td>
+          <td><strong>Химчистка салона</strong><span class="sub">Торнадор, экстрактор, паровая очистка воздуховодов, озонирование</span></td>
           <td>Торнадор, экстрактор, паровая очистка воздуховодов, озонирование</td>
           <td class="p-val">от 12 000 ₽</td>
         </tr>
         <tr>
-          <td><strong>Оклейка глянца салона</strong></td>
+          <td><strong>Оклейка глянца салона</strong><span class="sub">Экраны мультимедиа, приборная панель, центральная консоль</span></td>
           <td>Экраны мультимедиа, приборная панель, центральная консоль</td>
           <td class="p-val">от 5 000 ₽</td>
         </tr>

@@ -93,14 +93,21 @@ def audit_tula_studios():
             errors.append(f"[{slug}] Base price {price_zones} missing in index.html")
             
         # 6. Section Sequence Check (01 through 08)
-        h2_texts = [h.get_text(strip=True) for h in soup.find_all("h2")]
+        num_texts = [n.get_text(strip=True) for n in soup.select(".sh .num, .num")]
         expected_prefixes = ["01", "02", "03", "04", "05", "06", "07", "08"]
         for pfx in expected_prefixes:
-            found = any(h.startswith(pfx) for h in h2_texts)
-            if not found:
-                errors.append(f"[{slug}] Missing section header with prefix '{pfx}'")
-                
-        # 7. Privacy Policy Integrity
+            if pfx not in num_texts:
+                errors.append(f"[{slug}] Missing section header locker tag '{pfx}'")
+
+        # 7. Mobile Table & Engine Check
+        if "min-width: 480px" in html or "min-width:480px" in html:
+            errors.append(f"[{slug}] Contains forbidden 'min-width: 480px' blocking mobile table fit")
+        if "min-width:0" not in html and "min-width: 0" not in html:
+            errors.append(f"[{slug}] Missing required 'min-width: 0' on table")
+        if ".hero-word" not in html or "IntersectionObserver" not in html:
+            errors.append(f"[{slug}] Missing mobile/desktop animation engine")
+
+        # 8. Privacy Policy Integrity
         if name.lower() not in pol_html.lower():
             errors.append(f"[{slug}] politika.html does not contain business name '{name}'")
         if addr.lower() not in pol_html.lower():
@@ -108,7 +115,7 @@ def audit_tula_studios():
         if "index.html" not in pol_html:
             errors.append(f"[{slug}] politika.html missing back link to index.html")
             
-        # 8. No Placeholder Contamination
+        # 9. No Placeholder Contamination
         for placeholder in ["ул. Примерная, 1", "ИП Иванов"]:
             if placeholder in html or placeholder in pol_html:
                 errors.append(f"[{slug}] Contains forbidden placeholder '{placeholder}'")
@@ -198,13 +205,21 @@ def audit_krasnoyarsk_baths():
             if "четверг" not in html.lower():
                 errors.append("[kedrovy-log] Missing authentic Thursday promo")
                 
-        # 7. Privacy Policy Integrity
+        # 7. Mobile Table & Engine Check
+        if "min-width: 480px" in html or "min-width:480px" in html:
+            errors.append(f"[{slug}] Contains forbidden 'min-width: 480px' blocking mobile table fit")
+        if "min-width:0" not in html and "min-width: 0" not in html:
+            errors.append(f"[{slug}] Missing required 'min-width: 0' on table")
+        if ".hero-word" not in html or "IntersectionObserver" not in html:
+            errors.append(f"[{slug}] Missing mobile/desktop animation engine")
+
+        # 8. Privacy Policy Integrity
         if name.lower() not in pol_html.lower():
             errors.append(f"[{slug}] politika.html does not contain business name '{name}'")
         if "index.html" not in pol_html:
             errors.append(f"[{slug}] politika.html missing back link to index.html")
             
-        # 8. No Placeholder Contamination
+        # 9. No Placeholder Contamination
         for placeholder in ["ул. Примерная, 1", "ИП Иванов"]:
             if placeholder in html or placeholder in pol_html:
                 errors.append(f"[{slug}] Contains forbidden placeholder '{placeholder}'")
