@@ -107,7 +107,7 @@ h1,h2,h3{margin:0;font-weight:600}
 .top-switcher-btn .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-on-dark);box-shadow:0 0 8px var(--accent-on-dark)}
 
 /* sub-navigation tabs */
-.tabs{position:sticky;top:64px;z-index:50;background:rgba(11,12,14,0.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--night-line)}
+.tabs{position:sticky;top:calc(64px + env(safe-area-inset-top, 0px));z-index:50;background:rgba(11,12,14,0.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--night-line)}
 .tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px;scrollbar-width:none}
 .tabs .wrap::-webkit-scrollbar{display:none}
 .tabs a{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:600;color:var(--night-muted);background:var(--night-2);border:1px solid var(--night-line);transition:all .15s}
@@ -127,7 +127,7 @@ body:not(.hero-entered) .hero .frame-slot{position:relative;z-index:99999}
 
 .stage{position:relative;container-type:inline-size}
 
-.hero-word{font:700 17.2cqi/0.92 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:4px 0 6px;padding-bottom:4px;white-space:nowrap;user-select:none;display:flex;justify-content:space-between;color:rgba(255,255,255,0.92);transform:translate3d(0,calc(var(--scroll-y, 0) * 0.18px),0);will-change:transform}
+.hero-word{font:700 clamp(36px, 16.2cqi, 64px)/1.0 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:4px 0 6px;padding:4px 0 6px;white-space:nowrap;user-select:none;display:flex;justify-content:space-between;color:rgba(255,255,255,0.92);transform:translate3d(0,calc(var(--scroll-y, 0) * 0.18px),0);overflow:visible;will-change:transform}
 .hero-word span{display:inline-block;opacity:0;transform:translateY(36%);transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .6s ease;will-change:transform,opacity}
 .hero.revealed .hero-word span, .hero.on .hero-word span, .hero-entered .hero-word span{opacity:1;transform:translateY(0);transition-delay:calc(var(--i) * 45ms + 40ms)}
 
@@ -140,6 +140,26 @@ body:not(.hero-entered) .hero .frame-slot{position:relative;z-index:99999}
 #heroVideoStage:not(.is-docked) video{width:100%;height:100%;object-fit:contain}
 #heroVideoStage.is-docked{position:relative;top:auto !important;left:auto !important;width:100% !important;height:100% !important;aspect-ratio:2.35 / 1 !important;border-radius:var(--r);z-index:2;margin-top:0 !important;transition:none !important;box-shadow:0 24px 60px -20px rgba(0,0,0,.65);border:1px solid var(--night-line)}
 #heroVideoStage.is-docked video{width:100%;height:100%;object-fit:cover}
+
+@media (max-width: 767px){
+  body:not(.hero-entered)::before{content:"";position:fixed;inset:0;background:#0B0C0E;z-index:99990;pointer-events:none;transition:opacity .8s ease}
+  body.hero-entered::before{opacity:0}
+  #heroVideoStage:not(.is-docked){top:calc(50svh - ((100vw - 24px) * 10 / 16) / 2) !important;left:12px !important;width:calc(100vw - 24px) !important;height:calc((100vw - 24px) * 10 / 16) !important;aspect-ratio:16/10 !important;border-radius:22px !important;box-shadow:0 24px 60px rgba(0,0,0,0.85) !important;border:1px solid rgba(255,255,255,0.12) !important;overflow:visible !important}
+  #heroVideoStage:not(.is-docked) video{width:100% !important;height:100% !important;object-fit:cover !important;border-radius:22px !important}
+  .cinema-intro-meta{position:absolute;bottom:calc(100% + 14px);left:0;right:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;z-index:10;transition:opacity .4s ease}
+  .cinema-intro-meta .c-brand{font:700 18px/1.1 var(--display, var(--sans));text-transform:uppercase;letter-spacing:.08em;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.8)}
+  .cinema-intro-meta .c-badge{font:600 11px/1 var(--sans);color:var(--accent-on-dark,#ff7a4d);letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,0.08);padding:5px 12px;border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12)}
+  #heroVideoStage:not(.is-docked) .cinema-skip{top:calc(100% + 18px) !important;left:50% !important;transform:translateX(-50%) !important;bottom:auto !important;right:auto !important;min-height:48px !important;padding:0 22px !important;border-radius:999px !important;background:rgba(255,255,255,0.14) !important;backdrop-filter:blur(14px) !important;-webkit-backdrop-filter:blur(14px) !important;border:1px solid rgba(255,255,255,0.25) !important;color:#fff !important;font:600 13px/1 var(--sans) !important;box-shadow:0 8px 24px rgba(0,0,0,0.45) !important;z-index:10 !important;white-space:nowrap !important}
+  #heroVideoStage.is-docking .cinema-intro-meta, #heroVideoStage.is-docked .cinema-intro-meta{opacity:0 !important;pointer-events:none !important;display:none !important}
+  .car-layer-clean{-webkit-mask-image:radial-gradient(circle 38px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 72%, rgba(0,0,0,0.35) 90%, transparent 100%) !important;mask-image:radial-gradient(circle 38px at var(--mx, -999px) var(--my, -999px), #000 0%, #000 72%, rgba(0,0,0,0.35) 90%, transparent 100%) !important}
+  .car-loupe{width:76px !important;height:76px !important}
+}
+@media (min-width: 768px){
+  .cinema-intro-meta{position:absolute;top:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;z-index:10;transition:opacity .4s ease}
+  .cinema-intro-meta .c-brand{font:700 22px/1.1 var(--display, var(--sans));text-transform:uppercase;letter-spacing:.08em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.85)}
+  .cinema-intro-meta .c-badge{font:600 12px/1 var(--sans);color:var(--accent-on-dark,#ff7a4d);letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,0.08);padding:6px 14px;border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12)}
+  #heroVideoStage.is-docking .cinema-intro-meta, #heroVideoStage.is-docked .cinema-intro-meta{opacity:0 !important;pointer-events:none !important;display:none !important}
+}
 
 /* TRUE DUSTY-TO-CLEAN 2-LAYER REVEAL ENGINE */
 .car-wipe-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;opacity:0;pointer-events:none;transition:opacity .4s ease;cursor:none}
@@ -189,8 +209,8 @@ body:not(.hero-entered) .hero .frame-slot{position:relative;z-index:99999}
 #steam{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
 #steam.on{opacity:1}
 
-.hero h1{font:700 26px/1.14 var(--display);text-transform:uppercase;margin:16px 0 12px;letter-spacing:-.01em;color:#fff}
-.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;margin:0 0 16px;font-size:14px}
+.hero h1{font:700 clamp(28px, 7.8vw, 36px)/1.08 var(--display);text-transform:uppercase;margin:12px 0 10px;letter-spacing:-.01em;color:#fff}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;margin:0 0 14px;font-size:14px}
 .facts div{display:flex;flex-direction:column}
 .facts dt{color:var(--night-muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
 .facts dd{margin:2px 0 0;font-weight:600;color:#fff}
@@ -240,9 +260,9 @@ section.night{background:var(--night);color:#fff;padding-top:96px !important;pad
 .sh.on .w-in, .sh.on .w-reveal, .sh.in .w-in, .sh.in .w-reveal, .on .w-in, .on .w-reveal, .in .w-in, .in .w-reveal, html.no-anim .w-in, html.no-anim .w-reveal{transform:translate3d(0,0,0) !important;opacity:1 !important}
 
 @media (max-width: 899px){
-  .sh .num{width:44px;height:56px;font-size:20px;border-radius:14px 14px 0 14px}
-  .sh-t{padding-left:58px}
-  .sh h2{font-size:24px;line-height:1.2}
+  .sh .num{width:46px;height:60px;font-size:20px;border-radius:14px 14px 0 14px}
+  .sh-t{padding-left:60px}
+  .sh h2{font-size:clamp(24px, 6.8vw, 32px);line-height:1.14}
 }
 
 /* RATING SUMMARY BANNER */
@@ -314,7 +334,7 @@ body:not(.no-js) .tech-item.in{opacity:1;transform:translate3d(0,0,0)}
 .night-glow{position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(223,78,22,0.2) 0%,rgba(200,164,100,0.06) 45%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);left:var(--mx,50%);top:var(--my,200px);z-index:0;opacity:.8;transition:opacity .3s}
 
 /* Touch/mouse-draggable Before/After slider */
-.ba-container{position:relative;width:100%;max-width:920px;margin:0 auto 36px;border-radius:var(--r);overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.6);aspect-ratio:16/9;user-select:none;touch-action:none;border:1px solid var(--night-line);background:#000;container-type:inline-size}
+.ba-container{position:relative;width:100%;max-width:920px;margin:0 auto 36px;border-radius:var(--r);overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.6);aspect-ratio:16/9;user-select:none;touch-action:pan-y;border:1px solid var(--night-line);background:#000;container-type:inline-size}
 .ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .ba-after{position:absolute;inset:0;overflow:hidden;width:var(--pos,50%)}
 .ba-after .ba-img{width:100cqw;max-width:none;height:100%;object-fit:cover}
@@ -343,6 +363,9 @@ body:not(.no-js) .tech-item.in{opacity:1;transform:translate3d(0,0,0)}
 
 /* 04. PRICING & INCLUDED */
 .price-table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px}
+@media (max-width: 767px){
+  .price-table{min-width:480px}
+}
 .price-table th{text-align:left;font:700 13px/1 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 14px;border-bottom:2px solid var(--line)}
 .price-table td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--ink-2)}
 .price-table tr:hover td{background:var(--paper)}
@@ -398,11 +421,11 @@ footer a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .f-grid{display:grid;grid-template-columns:1fr;gap:20px}
 
 /* MOBILE BOTTOM DOCK (< 900px) */
-.dock{position:fixed;bottom:0;left:0;right:0;z-index:55;background:rgba(11,12,14,.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--night-line);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));display:flex;gap:8px}
-.dock .btn{flex:1;min-width:0;min-height:46px;font-size:13px;padding:0 8px}
+.dock{position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(11,12,14,.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--night-line);padding:8px 10px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px}
+.dock .btn{flex:1;min-width:0;min-height:48px;font-size:14px;padding:0 8px}
 
 /* MODAL / BOTTOM SHEET */
-dialog.sheet{border:0;padding:0;margin:auto auto 0;width:100%;max-width:540px;max-height:92vh;border-radius:24px 24px 0 0;background:#fff;box-shadow:0 -10px 40px rgba(0,0,0,.25);color:var(--ink);font-family:var(--sans)}
+dialog.sheet{border:0;padding:0;margin:auto auto 0;width:100%;max-width:540px;max-height:92vh;border-radius:28px 28px 0 0;background:#fff;box-shadow:0 -10px 40px rgba(0,0,0,.25);color:var(--ink);font-family:var(--sans)}
 dialog.sheet::backdrop{background:rgba(9,10,13,.65);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 dialog.sheet[open]{animation:sheet-up .3s var(--ease)}
 @keyframes sheet-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
@@ -598,6 +621,11 @@ dialog#switcherModal::backdrop{background:rgba(9,10,13,.75);-webkit-backdrop-fil
 
       <div class="frame-slot" id="heroFrameSlot">
         <div class="frame" id="heroVideoStage">
+          <div class="cinema-intro-meta" id="cinemaIntroMeta" aria-hidden="true">
+            <span class="c-brand">ПЛЕНКА 71</span>
+            <span class="c-badge">★ 4.9 · ПРЕМИУМ ДЕТЕЙЛИНГ В ТУЛЕ</span>
+          </div>
+
           <video id="heroCarVideo" src="../../img/hero-entry.mp4" playsinline muted preload="auto" poster="../../img/hero-entry-final.jpg"></video>
 
           <!-- True 2-Layer Dusty-to-Clean Wiper Canvas -->
@@ -2286,7 +2314,7 @@ $$("[data-scroll-to]").forEach(function(btn){
   }
 })();
 
-/* TRUE DUSTY-TO-CLEAN WIPER & OPTICAL LOUPE ENGINE */
+/* TRUE DUSTY-TO-CLEAN WIPER & OPTICAL LOUPE ENGINE (MOBILE CONTINUOUS AUTO-SWEEP + TOUCH) */
 (function initDustyToCleanWiper(){
   var stage = document.getElementById('heroVideoStage');
   var loupe = document.getElementById('carLoupe');
@@ -2294,9 +2322,9 @@ $$("[data-scroll-to]").forEach(function(btn){
   var hint = document.getElementById('inspectHint');
   if (!stage || !loupe) return;
 
-  var hasInteracted = false;
-  var demoTimer = null;
-  var demoRaf = null;
+  var isUserTouching = false;
+  var sweepTimer = null;
+  var sweepRaf = null;
 
   function setLoupePos(x, y) {
     var r = stage.getBoundingClientRect();
@@ -2322,78 +2350,69 @@ $$("[data-scroll-to]").forEach(function(btn){
     }
   }
 
-  function stopDemo() {
-    if (demoTimer) { clearTimeout(demoTimer); demoTimer = null; }
-    if (demoRaf) { cancelAnimationFrame(demoRaf); demoRaf = null; }
-  }
-
-  function startDemoSweep() {
-    if (hasInteracted || !window.__onDockComplete || !stage.classList.contains('is-docked')) return;
+  function runAutoSweep(time) {
+    if (isUserTouching || !stage.classList.contains('is-docked') || stage.classList.contains('is-replaying')) {
+      sweepRaf = null;
+      return;
+    }
     stage.classList.add('is-inspecting');
-    var startTime = performance.now();
-    var duration = 2400; // 2.4s sweep
-
-    function step(now) {
-      if (hasInteracted) {
-        stage.classList.remove('is-inspecting');
-        return;
-      }
-      var elapsed = now - startTime;
-      var t = Math.min(1, elapsed / duration);
-      var ease = 0.5 - 0.5 * Math.cos(t * Math.PI);
-      var r = stage.getBoundingClientRect();
-      var x = r.left + r.width * (0.24 + 0.52 * ease);
-      var y = r.top + r.height * 0.52;
+    var r = stage.getBoundingClientRect();
+    if (r.width > 0 && r.height > 0) {
+      // Smooth sinusoidal figure-8 sweep across hood, headlights, and front doors
+      var t = time * 0.0016;
+      var normX = 0.50 + 0.32 * Math.sin(t);
+      var normY = 0.50 + 0.22 * Math.sin(t * 2);
+      var x = r.left + r.width * normX;
+      var y = r.top + r.height * normY;
       setLoupePos(x, y);
-
-      if (t < 1) {
-        demoRaf = requestAnimationFrame(step);
-      } else {
-        stage.classList.remove('is-inspecting');
-      }
     }
-    demoRaf = requestAnimationFrame(step);
+    sweepRaf = requestAnimationFrame(runAutoSweep);
   }
 
-  function onUserStart() {
-    if (!hasInteracted) {
-      hasInteracted = true;
-      stopDemo();
-      if (hint) hint.classList.add('hide');
+  function startSweep() {
+    if (sweepRaf || isUserTouching) return;
+    sweepRaf = requestAnimationFrame(runAutoSweep);
+  }
+
+  function pauseSweep() {
+    if (sweepRaf) {
+      cancelAnimationFrame(sweepRaf);
+      sweepRaf = null;
+    }
+    if (sweepTimer) {
+      clearTimeout(sweepTimer);
+      sweepTimer = null;
     }
   }
 
-  stage.addEventListener('pointerenter', function(e) {
-    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
-    onUserStart();
-    stage.classList.add('is-inspecting');
-    setLoupePos(e.clientX, e.clientY);
-  });
+  function resumeSweepAfter(ms) {
+    pauseSweep();
+    sweepTimer = setTimeout(function() {
+      isUserTouching = false;
+      startSweep();
+    }, ms || 1500);
+  }
 
-  stage.addEventListener('pointermove', function(e) {
-    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
-    onUserStart();
-    stage.classList.add('is-inspecting');
-    setLoupePos(e.clientX, e.clientY);
-  });
+  window.__scheduleLoupeDemo = function() {
+    startSweep();
+  };
 
-  stage.addEventListener('pointerleave', function() {
-    stage.classList.remove('is-inspecting');
-  });
-
-  // Mobile touch support
+  // Mobile Touch Wiper
   stage.addEventListener('touchstart', function(e) {
-    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
-    onUserStart();
+    if (!stage.classList.contains('is-docked') || stage.classList.contains('is-replaying')) return;
+    isUserTouching = true;
+    pauseSweep();
     stage.classList.add('is-inspecting');
+    if (hint) hint.classList.add('hide');
     if (e.touches && e.touches[0]) {
       setLoupePos(e.touches[0].clientX, e.touches[0].clientY);
     }
   }, { passive: true });
 
   stage.addEventListener('touchmove', function(e) {
-    if (!window.__onDockComplete || !stage.classList.contains('is-docked')) return;
-    onUserStart();
+    if (!stage.classList.contains('is-docked') || stage.classList.contains('is-replaying')) return;
+    isUserTouching = true;
+    pauseSweep();
     stage.classList.add('is-inspecting');
     if (e.touches && e.touches[0]) {
       setLoupePos(e.touches[0].clientX, e.touches[0].clientY);
@@ -2401,15 +2420,69 @@ $$("[data-scroll-to]").forEach(function(btn){
   }, { passive: true });
 
   stage.addEventListener('touchend', function() {
-    setTimeout(function() {
-      stage.classList.remove('is-inspecting');
-    }, 1200);
+    resumeSweepAfter(1500);
+  }, { passive: true });
+
+  // Desktop Pointer / Mouse
+  stage.addEventListener('pointerenter', function(e) {
+    if (e.pointerType === 'touch') return;
+    if (!stage.classList.contains('is-docked') || stage.classList.contains('is-replaying')) return;
+    isUserTouching = true;
+    pauseSweep();
+    stage.classList.add('is-inspecting');
+    if (hint) hint.classList.add('hide');
+    setLoupePos(e.clientX, e.clientY);
   });
 
-  window.__scheduleLoupeDemo = function() {
-    demoTimer = setTimeout(startDemoSweep, 1200);
-  };
+  stage.addEventListener('pointermove', function(e) {
+    if (e.pointerType === 'touch') return;
+    if (!stage.classList.contains('is-docked') || stage.classList.contains('is-replaying')) return;
+    isUserTouching = true;
+    pauseSweep();
+    stage.classList.add('is-inspecting');
+    setLoupePos(e.clientX, e.clientY);
+  });
+
+  stage.addEventListener('pointerleave', function(e) {
+    if (e.pointerType === 'touch') return;
+    stage.classList.remove('is-inspecting');
+    resumeSweepAfter(1200);
+  });
+
+  if (stage.classList.contains('is-docked')) {
+    startSweep();
+  }
 })();
+
+/* SUBNAV TABS & SECTION HIGHLIGHT + AUTO-CENTER ON SCROLL */
+if ("IntersectionObserver" in window) {
+  var tabLinks = {};
+  $$(".tabs a, .topnav a").forEach(function(a) {
+    var id = a.getAttribute("href").slice(1);
+    (tabLinks[id] = tabLinks[id] || []).push(a);
+  });
+  var curActiveTabs = [];
+  var secObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        if (tabLinks[id]) {
+          curActiveTabs.forEach(function(a) { a.classList.remove("on"); });
+          curActiveTabs = tabLinks[id];
+          curActiveTabs.forEach(function(a) {
+            a.classList.add("on");
+            if (a.closest('.tabs')) {
+              a.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            }
+          });
+        }
+      }
+    });
+  }, { rootMargin: "-20% 0px -70% 0px" });
+  $$("section[id]").forEach(function(sec) {
+    secObserver.observe(sec);
+  });
+}
 
 /* ROCK-SOLID INTERSECTION OBSERVER (TRIGGER EARLIER WITH CRISP MOTION) */
 var rv = new IntersectionObserver(function(entries){
