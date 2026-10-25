@@ -279,14 +279,14 @@ section.night{{background:var(--night);color:#fff;padding-top:96px !important;pa
 
 /* SECTION HEADERS (3D STUDIO NUMBER TAGS + EYEBROW + KINETIC WORD REVEAL) */
 .sh{{position:relative;margin-bottom:28px}}
-.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display, var(--sans));border-radius:18px 18px 0 18px;box-shadow:0 8px 24px rgba(223,78,22,0.35);opacity:0;transform:perspective(600px) rotateY(-35deg) scale(0.9);transition:transform .65s cubic-bezier(.16,1,.3,1),opacity .5s ease;transition-delay:60ms}}
+.sh .num{{position:absolute;left:0;top:0;width:52px;height:68px;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 24px/1 var(--display, var(--sans));border-radius:18px 18px 0 18px;box-shadow:0 8px 24px rgba(223,78,22,0.35);opacity:1 !important;transform:perspective(600px) rotateY(0deg) scale(1) !important;transition:transform .65s cubic-bezier(.16,1,.3,1),opacity .5s ease;transition-delay:60ms}}
 .sh .num::before{{content:"";position:absolute;right:0;bottom:-12px;width:12px;height:12px;background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent) 13px)}}
 .night .sh .num{{background:var(--accent-on-dark);color:#0B0C0E;box-shadow:0 8px 24px rgba(223,78,22,0.45)}}
 .night .sh .num::before{{background:radial-gradient(circle at 100% 100%,transparent 12px,var(--accent-on-dark) 13px)}}
 .sh.on .num, .sh.in .num, .on .sh .num, .in .sh .num, html.no-anim .sh .num{{opacity:1 !important;transform:perspective(600px) rotateY(0deg) scale(1) !important}}
 
 .sh-t{{position:relative;padding:4px 0 0 70px}}
-.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;transition-delay:0ms}}
+.eyebrow{{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;opacity:1 !important;transform:none !important;transition:opacity .4s ease,transform .4s ease;transition-delay:0ms}}
 .night .eyebrow{{color:var(--accent-on-dark)}}
 .sh.on .eyebrow, .sh.in .eyebrow, .on .eyebrow, .in .eyebrow, html.no-anim .eyebrow{{opacity:1 !important;transform:none !important}}
 
@@ -321,12 +321,10 @@ section.night{{background:var(--night);color:#fff;padding-top:96px !important;pa
   .rev-summary-banner{{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 16px}}
 }}
 
-/* STAGGERED REVEAL CARDS WITH COPPER HOVER ELEVATION */
-.pk-card, .tech-item{{transition:opacity .55s cubic-bezier(0.16,1,0.3,1),transform .55s cubic-bezier(0.16,1,0.3,1),box-shadow .35s ease,border-color .35s ease;transition-delay:calc(var(--ci, 0) * 70ms);will-change:transform,opacity}}
-body:not(.no-js) .pk-card:not(.in),
-body:not(.no-js) .tech-item:not(.in){{opacity:0.2;transform:translate3d(0,24px,0)}}
-body:not(.no-js) .pk-card.in,
-body:not(.no-js) .tech-item.in{{opacity:1;transform:translate3d(0,0,0)}}
+/* STAGGERED REVEAL CARDS WITH COPPER HOVER ELEVATION (100% OPAQUE) */
+.pk-card, .tech-item{{opacity:1 !important;transform:none !important;transition:box-shadow .35s ease,border-color .35s ease,transform .2s ease;will-change:transform,box-shadow}}
+body:not(.no-js) .pk-card,
+body:not(.no-js) .tech-item{{opacity:1 !important;transform:none !important}}
 
 /* 01. SLOTS (100% Opaque High-Contrast Warm Stone Tickets) */
 .slots > li{{opacity:1 !important;transform:none !important}}
@@ -424,15 +422,15 @@ body:not(.no-js) .tech-item.in{{opacity:1;transform:translate3d(0,0,0)}}
 .zero-badge{{background:rgba(223,78,22,0.1);color:var(--accent);padding:4px 10px;border-radius:999px;font:700 12px/1 var(--sans);border:1px solid rgba(223,78,22,0.25)}}
 .included-grid{{display:grid;grid-template-columns:1fr;gap:12px}}
 .inc-item{{display:flex;align-items:flex-start;gap:10px;font-size:14px}}
-.inc-item svg{{width:18px;height:18px;color:var(--accent);flex:none;margin-top:2px}}
+.inc-item svg{{width:18px;height:18px;color:#DF4E16 !important;fill:#DF4E16 !important;flex:none;margin-top:2px}}
 
 /* 05. TECH STANDARDS & PROCESS WALKTHROUGH */
 .tech-grid{{display:grid;grid-template-columns:1fr;gap:16px}}
-.tech-item{{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:all .2s}}
+.tech-item{{background:#fff;border:1px solid #DCDAE2;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;opacity:1 !important;transform:none !important;box-shadow:0 4px 16px rgba(0,0,0,0.04);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}}
 .tech-item:hover{{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 30px -8px var(--accent-glow)}}
-.tech-num{{font:700 24px/1 var(--display);color:var(--accent)}}
-.tech-h{{font:700 16px/1.2 var(--sans);color:var(--ink)}}
-.tech-p{{font-size:13px;color:var(--muted);line-height:1.45}}
+.tech-num{{font:700 24px/1 var(--display, var(--sans));color:#DF4E16 !important}}
+.tech-h{{font:700 16px/1.2 var(--sans);color:#0B0C0E !important}}
+.tech-p{{font-size:13px;color:#2A2D33 !important;line-height:1.45}}
 
 /* 06. REVIEWS (2-ROW OPPOSING KINETIC MARQUEE WITH EDGE-FADE GRADIENTS) */
 .rev-marquee-wrap{{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;user-select:none;padding:16px 0 24px;mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)}}
@@ -959,9 +957,9 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 
     <!-- TOUCH/MOUSE DRAGGABLE BEFORE/AFTER SLIDER (BMW M8) -->
     <div class="ba-container" id="baSlider" style="--pos:50%">
-      <img class="ba-img" src="/img/bmw-clean.jpg" alt="BMW M8 после полировки и оклейки полиуретаном" loading="lazy">
+      <img class="ba-img" src="{pfx}img/bmw-clean.jpg" alt="BMW M8 после полировки и оклейки полиуретаном" loading="lazy">
       <div class="ba-after" id="baAfter">
-        <img class="ba-img" src="/img/bmw-dirty.jpg" alt="BMW M8 с затертым лаком и пескоструем" loading="lazy">
+        <img class="ba-img" src="{pfx}img/bmw-dirty.jpg" alt="BMW M8 с затертым лаком и пескоструем" loading="lazy">
       </div>
       <div class="ba-slider-line"></div>
       <div class="ba-handle" id="baHandle">
@@ -977,7 +975,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       <!-- Card 1 -->
       <article class="pk-card">
         <div class="pk-card-media">
-          <img src="/img/ppf-detail.jpg" alt="Оклейка зон риска полиуретаном" loading="lazy">
+          <img src="{pfx}img/ppf-detail.jpg" alt="Оклейка зон риска полиуретаном" loading="lazy">
         </div>
         <div class="pk-card-body">
           <h3 class="pk-title">Базовый: Зоны риска</h3>
@@ -996,7 +994,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       <!-- Card 2 -->
       <article class="pk-card">
         <div class="pk-card-media">
-          <img src="/img/ceramic-mirror-v2.jpg" alt="Полировка кузова и керамика" loading="lazy">
+          <img src="{pfx}img/ceramic-mirror-v2.jpg" alt="Полировка кузова и керамика" loading="lazy">
         </div>
         <div class="pk-card-body">
           <h3 class="pk-title">Комплекс: Глянец 9H</h3>
@@ -1015,7 +1013,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       <!-- Card 3 -->
       <article class="pk-card">
         <div class="pk-card-media">
-          <img src="/img/interior-detail.jpg" alt="Полная броня кузова и салона" loading="lazy">
+          <img src="{pfx}img/interior-detail.jpg" alt="Полная броня кузова и салона" loading="lazy">
         </div>
         <div class="pk-card-body">
           <h3 class="pk-title">Полная броня: Total PPF</h3>
@@ -1102,19 +1100,19 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       </div>
       <div class="included-grid">
         <div class="inc-item">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <svg viewBox="0 0 20 20" fill="#DF4E16" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           <div><strong>3-фазная детейлинг-мойка</strong> кузова и арок с кисточками и нейтральной пеной</div>
         </div>
         <div class="inc-item">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <svg viewBox="0 0 20 20" fill="#DF4E16" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           <div><strong>Глубокая очистка автоглиной</strong> и удаление металлических вкраплений / битума</div>
         </div>
         <div class="inc-item">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <svg viewBox="0 0 20 20" fill="#DF4E16" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           <div><strong>Ламповый осмотр толщиномером</strong> и составление карты состояния ЛКП</div>
         </div>
         <div class="inc-item">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <svg viewBox="0 0 20 20" fill="#DF4E16" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           <div><strong>Контрольный осмотр и мойка</strong> через 10–14 дней после оклейки (0 ₽)</div>
         </div>
       </div>
@@ -1128,7 +1126,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
     <div class="sh reveal">
       <span class="num" aria-hidden="true">05</span>
       <div class="sh-t">
-        <p class="eyebrow">Чистая зона без пыли</p>
+        <p class="eyebrow">Технологический регламент</p>
         <h2 id="h-tech">{split_words("Стандарты чистоты бокса и регламент работ")}</h2>
         <p class="lead">Оборудование и технологический процесс, исключающий пыль под пленкой и повреждение лака</p>
       </div>
@@ -2532,25 +2530,57 @@ if ("IntersectionObserver" in window) {{
   }});
 }}
 
-/* ROCK-SOLID INTERSECTION OBSERVER (TRIGGER EARLIER WITH CRISP MOTION) */
-var rv = new IntersectionObserver(function(entries){{
-  entries.forEach(function(entry){{
-    if (entry.isIntersecting) {{
-      entry.target.classList.add("in");
+/* FAIL-SAFE REVEAL ENGINE ON DETAILING (SCROLL + TIMERS) */
+function revealInViewport() {{
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  var targets = $$(".sh, .reveal, .reveal-card, .hero-info, .slots > li, .pk-card, .tech-item, .box");
+  for (var i = 0; i < targets.length; i++) {{
+    var el = targets[i];
+    if (el.classList.contains("in")) continue;
+    var rect = el.getBoundingClientRect();
+    if (rect.top < vh + 80 && rect.bottom > -80) {{
+      el.classList.add("in");
+      el.classList.add("on");
     }}
-  }});
-}}, {{ threshold: 0.02, rootMargin: "0px 0px -2% 0px" }});
+  }}
+}}
 
-$$(".sh, .hero-info, .pk-card, .tech-item").forEach(function(el, idx){{
-  el.style.setProperty("--ci", idx % 6);
-  rv.observe(el);
-}});
+if ("IntersectionObserver" in window) {{
+  var rv = new IntersectionObserver(function(entries){{
+    entries.forEach(function(entry){{
+      if (entry.isIntersecting) {{
+        entry.target.classList.add("in");
+        entry.target.classList.add("on");
+      }}
+    }});
+  }}, {{ threshold: 0.01, rootMargin: "0px 0px 50px 0px" }});
 
-if (navigator.webdriver) {{
-  $$(".sh, .hero-info, .slots > li, .pk-card, .tech-item").forEach(function(el){{
-    el.classList.add("in");
+  $$(".sh, .reveal, .reveal-card, .hero-info, .slots > li, .pk-card, .tech-item, .box").forEach(function(el, idx){{
+    el.style.setProperty("--ci", idx % 6);
+    rv.observe(el);
   }});
 }}
+
+window.addEventListener("scroll", function() {{
+  if (!window._rvRaf) {{
+    window._rvRaf = requestAnimationFrame(function() {{
+      revealInViewport();
+      window._rvRaf = null;
+    }});
+  }}
+}}, {{ passive: true }});
+
+revealInViewport();
+setTimeout(revealInViewport, 300);
+setTimeout(revealInViewport, 600);
+setTimeout(revealInViewport, 1200);
+
+setTimeout(function() {{
+  $$(".sh, .reveal, .reveal-card, .hero-info, .slots > li, .pk-card, .tech-item, .box").forEach(function(el){{
+    el.classList.add("in");
+    el.classList.add("on");
+  }});
+}}, 1500);
 
 /* CONTINUOUS SCROLL VELOCITY, KINETIC SKEW & PARALLAX */
 var lastScrollY = window.scrollY || 0;
