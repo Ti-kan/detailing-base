@@ -676,9 +676,9 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 
           <!-- True 2-Layer Dusty-to-Clean Wiper Canvas -->
           <div class="car-wipe-canvas" id="carWipeCanvas" aria-hidden="true">
-            <img class="car-layer car-layer-dusty" src="{pfx}img/car-dusty.jpg" alt="Пыльный кузов до полировки" width="1920" height="818" loading="lazy">
+            <img class="car-layer car-layer-dusty" src="{pfx}img/car-dusty.jpg" alt="Пыльный кузов до полировки" width="1920" height="818">
             <div class="car-layer car-layer-clean" id="carCleanLayer">
-              <img src="{pfx}img/car-clean.jpg" alt="Зеркальный глянец после детейлинга" width="1920" height="818" loading="lazy">
+              <img src="{pfx}img/car-clean.jpg" alt="Зеркальный глянец после детейлинга" width="1920" height="818">
             </div>
           </div>
 
@@ -957,9 +957,9 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
 
     <!-- TOUCH/MOUSE DRAGGABLE BEFORE/AFTER SLIDER (BMW M8) -->
     <div class="ba-container" id="baSlider" style="--pos:50%">
-      <img class="ba-img" src="{pfx}img/bmw-clean.jpg" alt="BMW M8 после полировки и оклейки полиуретаном" loading="lazy">
+      <img class="ba-img" src="{pfx}img/bmw-clean.jpg" alt="BMW M8 после полировки и оклейки полиуретаном">
       <div class="ba-after" id="baAfter">
-        <img class="ba-img" src="{pfx}img/bmw-dirty.jpg" alt="BMW M8 с затертым лаком и пескоструем" loading="lazy">
+        <img class="ba-img" src="{pfx}img/bmw-dirty.jpg" alt="BMW M8 с затертым лаком и пескоструем">
       </div>
       <div class="ba-slider-line"></div>
       <div class="ba-handle" id="baHandle">
@@ -975,7 +975,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       <!-- Card 1 -->
       <article class="pk-card">
         <div class="pk-card-media">
-          <img src="{pfx}img/ppf-detail.jpg" alt="Оклейка зон риска полиуретаном" loading="lazy">
+          <img src="{pfx}img/ppf-detail.jpg" alt="Оклейка зон риска полиуретаном">
         </div>
         <div class="pk-card-body">
           <h3 class="pk-title">Базовый: Зоны риска</h3>
@@ -994,7 +994,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       <!-- Card 2 -->
       <article class="pk-card">
         <div class="pk-card-media">
-          <img src="{pfx}img/ceramic-mirror-v2.jpg" alt="Полировка кузова и керамика" loading="lazy">
+          <img src="{pfx}img/ceramic-mirror-v2.jpg" alt="Полировка кузова и керамика">
         </div>
         <div class="pk-card-body">
           <h3 class="pk-title">Комплекс: Глянец 9H</h3>
@@ -1013,7 +1013,7 @@ dialog#switcherModal::backdrop{{background:rgba(9,10,13,.75);-webkit-backdrop-fi
       <!-- Card 3 -->
       <article class="pk-card">
         <div class="pk-card-media">
-          <img src="{pfx}img/interior-detail.jpg" alt="Полная броня кузова и салона" loading="lazy">
+          <img src="{pfx}img/interior-detail.jpg" alt="Полная броня кузова и салона">
         </div>
         <div class="pk-card-body">
           <h3 class="pk-title">Полная броня: Total PPF</h3>

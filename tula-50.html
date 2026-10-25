@@ -278,7 +278,7 @@ h1{font:700 clamp(28px,3.8vw,44px)/1.1 var(--display);text-transform:uppercase;l
     render(filtered);
   }
 
-  fetch("/studios-tula.json")
+  fetch("studios-tula.json")
     .then(function(r){ return r.json(); })
     .then(function(d){
       allData = d;
