@@ -59,19 +59,19 @@ def clean_detailing_street(addr):
     raw = re.sub(r',\s*Тула$', '', raw).strip()
     
     if 'Щёкино' in raw:
-        return 'в Щёкино (ул. Лукашина, 18А)'
+        return 'в Щёкино, ул. Лукашина, 18А'
     if 'Менделеевский' in raw:
-        return 'в Менделеевском (пр. Энергетиков, 8А)'
+        return 'в Менделеевском, пр. Энергетиков, 8А'
     if 'Рождественский' in raw:
-        return 'в Рождественском (ул. Фёдорова, 24)'
+        return 'в Рождественском, ул. Фёдорова, 24'
     if 'Плеханово' in raw:
-        return 'в Плеханово (территория Тулаэлектропривод, 265)'
+        return 'в Плеханово, территория Тулаэлектропривод, 265'
     if 'Гостиный двор' in raw:
-        return 'в ТК «Гостиный двор» (Советская ул., 47/1)'
+        return 'в ТК «Гостиный двор», Советская ул., 47/1'
     if 'Мясново' in raw:
         m = re.search(r'^(.*?),\s*(микрорайон\s+Мясново|Мясново)', raw)
         street = m.group(1) if m else raw
-        return f'в Мясново ({street})'
+        return f'в Мясново, {street}'.replace(' (', ', ').replace('(', '').replace(')', '')
     if 'Городской пер.' in raw:
         return 'в Городском пер., 64Б'
     if 'Карла Маркса' in raw:
@@ -137,6 +137,7 @@ def clean_detailing_street(addr):
     clean = raw
     if not (clean.startswith('на ') or clean.startswith('в ')):
         clean = 'на ' + clean
+    clean = clean.replace(' (', ', ').replace('(', '').replace(')', '')
     return clean
 
 def build_detailing_messages(s):
