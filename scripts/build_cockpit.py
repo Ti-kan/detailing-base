@@ -140,24 +140,26 @@ def clean_detailing_street(addr):
     clean = clean.replace(' (', ', ').replace('(', '').replace(')', '')
     return clean
 
-def build_detailing_messages(s):
+def build_detailing_messages(s, idx=1):
     name_clean = clean_detailing_name(s)
     street_short = clean_detailing_street(s['address'])
     slug = s['slug']
-    s_id = s.get('id', 1)
+    s_id = s.get('id', idx)
     price_min = s.get('price_zones', 35000)
     price_min_fmt = f"{price_min:,}".replace(",", " ")
     url = f"https://ti-kan.github.io/detailing-base/s/{slug}/"
     
-    greetings = ["Здравствуйте!", "Приветствую!", "Добрый день!"]
+    # Rotate greeting strictly between 'Добрый день!' and 'Здравствуйте!'
+    greetings = ["Добрый день!", "Здравствуйте!"]
     greeting = greetings[(s_id - 1) % len(greetings)]
     
-    # Ultra-concise 1-paragraph message
+    # New human anti-slop message format
     msg_single = (
-        f"{greeting} Увидели, что для вашей студии «{name_clean}» ({street_short}) можно сделать крутой современный сайт с онлайн-расчётом, и собрали специально под вас готовый вариант:\n"
-        f"👉 {url}\n\n"
-        f"Внутри уже стоят ваши цены (зоны риска от {price_min_fmt} ₽, полировка, керамика), интерактивный осмотр кузова, слайдер До/После и калькулятор по классам авто с прямой заявкой в ваш Telegram/WhatsApp. "
-        f"Так как сайт уже полностью собран под вас, готовы отдать его на ваш домен по цене буквально одного заезда в бокс — посмотрите с телефона, как вам?"
+        f"{greeting} Увидели, что для вашей студии можно сделать удобный современный сайт с онлайн-расчётом, и собрали под вас готовый вариант:\n"
+        f"{url}\n\n"
+        f"Уже перенесли туда ваши услуги, цены, примеры работ до и после и добавили калькулятор по классам авто с прямой заявкой в Telegram или WhatsApp. "
+        f"Так как сайт уже полностью собран под вас, готовы отдать его на ваш домен по цене одного стандартного заезда в бокс. "
+        f"Посмотрите с телефона — как вам?"
     )
     
     return {
@@ -667,8 +669,8 @@ def main():
         
     print(f"Loaded {len(studios)} studios from {DATA_PATH}")
     
-    for s in studios:
-        info = build_detailing_messages(s)
+    for i, s in enumerate(studios, 1):
+        info = build_detailing_messages(s, i)
         s.update(info)
         
     # Write enriched studios-tula.json
